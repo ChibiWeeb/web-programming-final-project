@@ -1,0 +1,51 @@
+$header-height: 50px;
+
+body {
+  margin: 0;
+}
+
+.site-wrapper {
+  height: 100vh;
+  margin-top: $header-height;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+          "content"
+          "footer";
+
+  .site-header {
+    margin-top: -$header-height;
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: $header-height;
+
+    .nav-menu {
+      display: none;
+      background-color: #ff4b18;
+    }
+
+    .hamburger-menu {
+      background-color: #78ff90;
+    }
+
+    .logo {
+      background-color: #78fff4;
+      flex: 1;
+    }
+
+    .search {
+      background-color: #f6ff78;
+    }
+  }
+
+  .main-content {
+    background-color: #789aff;
+    grid-area: content;
+  }
+
+  .site-footer {
+    background-color: #ff78dd;
+    grid-area: footer;
+  }
+}

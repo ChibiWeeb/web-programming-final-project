@@ -8,7 +8,7 @@ body {
   grid-template-areas: "logo prof-page menu-exp" "content content content" "footer footer footer";
 }
 .site-wrapper .site-logo {
-  background-color: #7bff68;
+  background-color: #83d777;
   grid-area: logo;
 }
 .site-wrapper .profile-page-icon {
@@ -16,16 +16,46 @@ body {
   grid-area: prof-page;
 }
 .site-wrapper .menu-expander {
-  background-color: #731a48;
+  background-color: #d07676;
   grid-area: menu-exp;
 }
 .site-wrapper .main-content {
-  background-color: #789aff;
+  background-color: #798fd7;
   grid-area: content;
 }
 .site-wrapper .site-footer {
-  background-color: #ff78dd;
+  background-color: #cd76b7;
   grid-area: footer;
+}
+
+.menu-wrapper {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "menu-name menu-clps" "content content";
+}
+.menu-wrapper .menu-name {
+  background-color: #409839;
+  grid-area: menu-name;
+}
+.menu-wrapper .menu-name h2 {
+  margin: 0;
+}
+.menu-wrapper .menu-collapser {
+  background-color: #a03939;
+  grid-area: menu-clps;
+}
+.menu-wrapper .main-content {
+  background-color: #354a94;
+  grid-area: content;
+}
+.menu-wrapper .main-content a {
+  color: black;
+  text-decoration: none;
+}
+.menu-wrapper .main-content a p {
+  margin: 1px;
+  padding: 5px;
+  border: 3px solid black;
 }
 
 /*# sourceMappingURL=layouts.css.map */

@@ -3,32 +3,21 @@ body {
 }
 
 .site-wrapper {
-  height: 100vh;
-  margin-top: 50px;
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-areas: "content" "footer";
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas: "logo prof-page menu-exp" "content content content" "footer footer footer";
 }
-.site-wrapper .site-header {
-  margin-top: -50px;
-  display: flex;
-  position: fixed;
-  width: 100%;
-  height: 50px;
+.site-wrapper .site-logo {
+  background-color: #7bff68;
+  grid-area: logo;
 }
-.site-wrapper .site-header .nav-menu {
-  display: none;
-  background-color: #ff4b18;
+.site-wrapper .profile-page-icon {
+  background-color: #cbcd74;
+  grid-area: prof-page;
 }
-.site-wrapper .site-header .hamburger-menu {
-  background-color: #78ff90;
-}
-.site-wrapper .site-header .logo {
-  background-color: #78fff4;
-  flex: 1;
-}
-.site-wrapper .site-header .search {
-  background-color: #f6ff78;
+.site-wrapper .menu-expander {
+  background-color: #731a48;
+  grid-area: menu-exp;
 }
 .site-wrapper .main-content {
   background-color: #789aff;

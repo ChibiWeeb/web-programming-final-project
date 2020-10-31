@@ -1,42 +1,28 @@
-$header-height: 50px;
-
 body {
   margin: 0;
 }
 
 .site-wrapper {
-  height: 100vh;
-  margin-top: $header-height;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr auto auto;
   grid-template-areas:
-          "content"
-          "footer";
+          "logo prof-page menu-exp"
+          "content content content"
+          "footer footer footer";
 
-  .site-header {
-    margin-top: -$header-height;
-    display: flex;
-    position: fixed;
-    width: 100%;
-    height: $header-height;
+  .site-logo {
+    background-color: #7bff68;
+    grid-area: logo;
+  }
 
-    .nav-menu {
-      display: none;
-      background-color: #ff4b18;
-    }
+  .profile-page-icon {
+    background-color: #cbcd74;
+    grid-area: prof-page;
+  }
 
-    .hamburger-menu {
-      background-color: #78ff90;
-    }
-
-    .logo {
-      background-color: #78fff4;
-      flex: 1;
-    }
-
-    .search {
-      background-color: #f6ff78;
-    }
+  .menu-expander {
+    background-color: #731a48;
+    grid-area: menu-exp;
   }
 
   .main-content {

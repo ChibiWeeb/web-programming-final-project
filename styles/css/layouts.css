@@ -2,28 +2,28 @@ body {
   margin: 0;
 }
 
-.site-wrapper {
+.main-page-wrapper {
   display: grid;
   grid-template-columns: 1fr auto auto;
   grid-template-areas: "logo prof-page menu-exp" "content content content" "footer footer footer";
 }
-.site-wrapper .site-logo {
+.main-page-wrapper .site-logo {
   background-color: #83d777;
   grid-area: logo;
 }
-.site-wrapper .profile-page-icon {
+.main-page-wrapper .profile-page-icon {
   background-color: #cbcd74;
   grid-area: prof-page;
 }
-.site-wrapper .menu-expander {
+.main-page-wrapper .menu-expander {
   background-color: #d07676;
   grid-area: menu-exp;
 }
-.site-wrapper .main-content {
+.main-page-wrapper .main-content {
   background-color: #798fd7;
   grid-area: content;
 }
-.site-wrapper .site-footer {
+.main-page-wrapper .site-footer {
   background-color: #cd76b7;
   grid-area: footer;
 }
@@ -52,10 +52,55 @@ body {
   color: black;
   text-decoration: none;
 }
-.menu-wrapper .main-content a p {
-  margin: 1px;
-  padding: 5px;
-  border: 3px solid black;
+
+.info-page-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 2fr 3fr 3fr 2fr 1fr 1fr;
+  grid-template-areas: "logo logo logo logo logo prof-page menu-exp" "title title title title title title title" ". picture picture picture picture picture ." ". . . rating rating rating ." "info info info info info info info" ". . . more more more more" "address address address address address address address" "footer footer footer footer footer footer footer";
+}
+.info-page-wrapper .site-logo {
+  background-color: #83d777;
+  grid-area: logo;
+}
+.info-page-wrapper .profile-page-icon {
+  background-color: #cbcd74;
+  grid-area: prof-page;
+}
+.info-page-wrapper .menu-expander {
+  background-color: #d07676;
+  grid-area: menu-exp;
+}
+.info-page-wrapper .title {
+  background-color: #d79277;
+  grid-area: title;
+  justify-self: center;
+}
+.info-page-wrapper .picture {
+  background-color: #77d4d7;
+  grid-area: picture;
+  justify-self: center;
+}
+.info-page-wrapper .rating {
+  background-color: #8977d7;
+  grid-area: rating;
+  justify-self: end;
+}
+.info-page-wrapper .info {
+  background-color: #d77795;
+  grid-area: info;
+}
+.info-page-wrapper .to-more-info {
+  background-color: #77d7b1;
+  grid-area: more;
+  justify-self: end;
+}
+.info-page-wrapper .address {
+  background-color: #d7b777;
+  grid-area: address;
+}
+.info-page-wrapper .site-footer {
+  background-color: #cd76b7;
+  grid-area: footer;
 }
 
 /*# sourceMappingURL=layouts.css.map */

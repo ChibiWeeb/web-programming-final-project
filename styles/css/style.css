@@ -9,6 +9,7 @@ html body nav {
   flex-direction: row;
   justify-content: space-between;
   position: fixed;
+  z-index: 999;
   top: 0;
   width: 100%;
   height: 50px;

@@ -6,7 +6,7 @@ initialize();
 function initialize() {
     logo.addEventListener("click", scrollToTop)
 
-    window.onscroll = function() {scrolledTooFarDownCheck(15000)};
+    window.onscroll = function() {scrolledTooFarDownCheck(10000)};
 }
 
 function scrollToTop() {

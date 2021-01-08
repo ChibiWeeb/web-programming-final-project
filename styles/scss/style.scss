@@ -12,6 +12,7 @@ html {
       justify-content: space-between;
 
       position: fixed;
+      z-index: 999;
       top: 0;
       width: 100%;
       height: $navbar-height;

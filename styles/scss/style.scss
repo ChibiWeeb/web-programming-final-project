@@ -1,0 +1,22 @@
+$navbar-height: 50px;
+
+html {
+  scroll-behavior: smooth; //TODO: Change to auto if scrolled too far down
+
+  body {
+    margin: $navbar-height 0 0 0;
+
+    nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: $navbar-height;
+
+      background-color: rebeccapurple;
+    }
+  }
+}

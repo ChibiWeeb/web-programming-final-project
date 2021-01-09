@@ -3,20 +3,14 @@ let filterButton = document.querySelector(".filter_button")
 let profileButton = document.querySelector(".profile_button")
 let html = document.querySelector("html")
 let sidebar = document.querySelector("aside")
+let dimmedOverlay = document.querySelector(".dimmed_overlay")
 
 initialize()
 
 function initialize() {
     logo.addEventListener("click", scrollToTop)
-    document.addEventListener("click", function (event) {
-        if (sidebar.offsetWidth === 0) {
-            if (event.target === profileButton) {
-                openSidebar(200)
-            }
-        } else if (!sidebar.contains(event.target)) {
-            closeSidebar()
-        }
-    })
+    profileButton.addEventListener("click", function () {openSidebar(200)}) //TODO: maybe fade color in/out?
+    dimmedOverlay.addEventListener("click", closeSidebar)
 
     window.onscroll = function () {
         scrolledTooFarDownCheck(10000)
@@ -40,9 +34,11 @@ function scrolledTooFarDownCheck(limit) {
 function openSidebar(width) {
     sidebar.style.width = width.toString() + "px"
     html.style.overflow = "hidden"
+    dimmedOverlay.style.display = "block"
 }
 
 function closeSidebar() {
     sidebar.style.width = "0"
     html.style.overflow = "visible"
+    dimmedOverlay.style.display = "none"
 }

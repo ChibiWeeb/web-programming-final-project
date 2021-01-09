@@ -14,7 +14,7 @@ html {
       justify-content: space-between;
 
       position: fixed;
-      z-index: 999;
+      z-index: 980;
       top: 0;
       width: 100%;
       height: $navbar-height;
@@ -32,6 +32,17 @@ html {
       transition: 0.5s;
       background-color: black;
       color: wheat;
+    }
+
+    .dimmed_overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 990;
+      background-color: rgba(0, 0, 0, 0.85);
     }
   }
 }

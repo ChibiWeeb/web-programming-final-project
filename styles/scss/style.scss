@@ -1,4 +1,5 @@
 $navbar-height: 50px;
+$filter-menu-width: 400px;
 
 
 html {
@@ -19,7 +20,22 @@ html {
       width: 100%;
       height: $navbar-height;
 
+      box-shadow: 0 4px 10px -1px black;
       background-color: rebeccapurple;
+    }
+
+    .filter_menu {
+      width: $filter-menu-width;
+      height: 200px;
+      top: -500px;
+      left: 50%;
+      margin-left: -$filter-menu-width / 2;
+      z-index: 985;
+      position: fixed;
+      transition: all 0.75s;
+      -webkit-transition-timing-function: ease;
+      transition-timing-function: ease;
+      background-color: black;
     }
 
     aside {

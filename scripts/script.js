@@ -1,10 +1,20 @@
+const html = document.querySelector("html")
+
 const logo = document.querySelector(".logo")
 const filterButton = document.querySelector(".filter_button")
 const profileButton = document.querySelector(".profile_button")
-const html = document.querySelector("html")
+
 const sidebar = document.querySelector("aside")
 const dimmedOverlay = document.querySelector(".dimmed_overlay")
+
 const filterMenu = document.querySelector(".filter_menu")
+const filterItems = document.querySelectorAll(".filter_item")
+const filterCancelButton = document.querySelector(".filter_cancel_button")
+const filterApplyButton = document.querySelector(".filter_apply_button")
+
+
+const filterItemValues = new Array(filterItems.length).fill(false);
+
 
 initialize()
 
@@ -18,7 +28,13 @@ function initialize() {
         closeSidebar()
     })
 
-    filterMenu.addEventListener("click", closeFilterMenu)
+    for (let i = 0; i < filterItems.length; i++) {
+        filterItems[i].addEventListener("click", function () {
+            toggleFilterItem(i)
+        })
+    }
+    filterCancelButton.addEventListener("click", cancelFilters)
+    filterApplyButton.addEventListener("click", applyFilters)
 
     window.onscroll = function () {
         scrolledTooFarDownCheck(10000)
@@ -55,7 +71,26 @@ function openFilterMenu() {
     filterMenu.style.top = "100px"
 }
 
-function closeFilterMenu() {
+function toggleFilterItem(index) {
+    if (!filterItemValues[index]) {
+        filterItems[index].style.backgroundColor = "darkred"
+        filterItems[index].style.color = "white"
+    } else {
+        filterItems[index].style.backgroundColor = "black"
+        filterItems[index].style.color = "darkred"
+    }
+    filterItemValues[index] = !filterItemValues[index]
+}
+
+function cancelFilters() {
+    filterItemValues.fill(false)
+    for (let i = 0; i < filterItems.length; i++) {
+        filterItems[i].style.backgroundColor = "black"
+        filterItems[i].style.color = "darkred"
+    }
+}
+
+function applyFilters() {
     filterButton.src = "images/filter_icon.png"
-    filterMenu.style.top = "-500px"
+    filterMenu.style.top = "-1000px"
 }

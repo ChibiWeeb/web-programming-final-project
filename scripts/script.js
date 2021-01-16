@@ -21,7 +21,7 @@ const filterItemValues = new Array(filterItems.length).fill(false)
 const hotelObjectStoreName = "hotelObjectStore"
 
 
-// databaseInit()
+databaseInit()
 initialize()
 showHotelList()
 

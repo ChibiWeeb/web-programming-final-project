@@ -100,5 +100,13 @@ html {
       z-index: 990;
       background-color: rgba(0, 0, 0, 0.85);
     }
+
+    .hotel_list {
+      display: grid;
+      gap: 10px;
+      justify-items: center;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: minmax(40px, auto);
+    }
   }
 }

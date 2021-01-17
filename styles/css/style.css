@@ -17,6 +17,9 @@ html body nav {
   box-shadow: 0 4px 10px -1px black;
   background-color: rebeccapurple;
 }
+html body nav img {
+  cursor: pointer;
+}
 html body .filter_menu {
   display: flex;
   flex-direction: column;
@@ -43,8 +46,9 @@ html body .filter_menu .filter_items_wrapper .filter_item {
   justify-content: center;
   align-items: center;
   user-select: none;
+  cursor: pointer;
   background-color: black;
-  color: darkred;
+  color: #8b0000;
 }
 html body .filter_menu .filter_buttons_wrapper {
   display: flex;
@@ -56,11 +60,13 @@ html body .filter_menu .filter_buttons_wrapper .filter_cancel_button {
   background-color: #de0a0a;
   width: 50px;
   height: 25px;
+  cursor: pointer;
 }
 html body .filter_menu .filter_buttons_wrapper .filter_apply_button {
   background-color: #316d2d;
   width: 50px;
   height: 25px;
+  cursor: pointer;
 }
 html body aside {
   position: fixed;
@@ -85,10 +91,28 @@ html body .dimmed_overlay {
 }
 html body .hotel_list {
   display: grid;
-  gap: 10px;
+  gap: 20px 40px;
   justify-items: center;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(40px, auto);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: auto;
+}
+html body .pagination {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  margin: 30px 0;
+}
+html body .pagination a {
+  float: left;
+  width: 60px;
+  margin: 0 8px;
+  padding: 8px 16px;
+  user-select: none;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  background-color: #3c146b;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=style.css.map */

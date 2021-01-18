@@ -13,38 +13,57 @@
     <img class="profile_button" src="images/profile_icon.png" alt="Profile Icon">
 </nav>
 <div class="filter_menu">
-    <div class="filter_items_wrapper">
-        <div class="filter_item" id="item1">
-            item1
+    <div class="filter_dropdowns_wrapper">
+        <div class="filter_dropdown" id="countries_dropdown">
+            <label for="countries">
+                <h3>Country</h3>
+            </label>
+            <select id="countries">
+                <option value="">Select country</option>
+            </select>
         </div>
-        <div class="filter_item" id="item2">
-            item2
+        <div class="filter_dropdown" id="cities_dropdown">
+            <label for="cities">
+                <h3>City</h3>
+            </label>
+            <select id="cities">
+                <option value="">Please select country first</option>
+            </select>
         </div>
-        <div class="filter_item" id="item3">
-            item3
+    </div>
+
+    <div class="filter_tags_wrapper">
+        <div class="filter_tag" id="pool">
+            Pool
         </div>
-        <div class="filter_item" id="item4">
-            item4
+        <div class="filter_tag" id="gym">
+            Gym
         </div>
-        <div class="filter_item" id="item5">
-            item5
+        <div class="filter_tag" id="bar">
+            Bar
         </div>
-        <div class="filter_item" id="item6">
-            item6
+        <div class="filter_tag" id="free_wifi">
+            Free WiFi
         </div>
-        <div class="filter_item" id="item7">
-            item7
+        <div class="filter_tag" id="buffet">
+            Buffet
         </div>
-        <div class="filter_item" id="item8">
-            item8
+        <div class="filter_tag" id="free_parking">
+            Free Parking
+        </div>
+        <div class="filter_tag" id="underground_parking">
+            Underground Parking
+        </div>
+        <div class="filter_tag" id="vending_machines">
+            Vending Machines
         </div>
     </div>
     <div class="filter_buttons_wrapper">
-        <div class="filter_cancel_button">
-
+        <div class="filter_button" id="filter_reset_button">
+            Reset
         </div>
-        <div class="filter_apply_button">
-
+        <div class="filter_button" id="filter_apply_button">
+            Apply
         </div>
     </div>
 </div>

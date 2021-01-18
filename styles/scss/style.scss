@@ -1,6 +1,6 @@
 $navbar-height: 50px;
 $filter-menu-width: 300px;
-$filter-menu-height: 400px;
+$filter-menu-height: 450px;
 
 
 html {
@@ -45,17 +45,33 @@ html {
 
       transition: all 0.75s ease;
 
-      .filter_items_wrapper {
+      .filter_dropdowns_wrapper {
+        margin: 15px 10px 5px;
+
+        .filter_dropdown {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          select {
+            height: 30px;
+            align-self: center;
+          }
+        }
+      }
+
+      .filter_tags_wrapper {
         display: grid;
         gap: 10px;
         margin: 10px;
-        grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: minmax(40px, auto);
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-auto-rows: minmax(45px, auto);
 
-        .filter_item {
+        .filter_tag {
           display: flex;
           justify-content: center;
           align-items: center;
+          text-align: center;
           user-select: none;
           cursor: pointer;
           background-color: black;
@@ -69,18 +85,24 @@ html {
         justify-content: space-evenly;
         margin-bottom: 20px;
 
-        .filter_cancel_button {
-          background-color: #de0a0a;
-          width: 50px;
-          height: 25px;
+        .filter_button {
+          width: 60px;
+          height: 35px;
+          line-height: 35px;
           cursor: pointer;
+          user-select: none;
+          text-align: center;
+          vertical-align: middle;
+          color: #bcbcbc;
         }
 
-        .filter_apply_button {
+        #filter_reset_button {
+          background-color: #de0a0a;
+        }
+
+        #filter_apply_button {
           background-color: #316d2d;
-          width: 50px;
-          height: 25px;
-          cursor: pointer;
+
         }
       }
     }
@@ -118,6 +140,7 @@ html {
 
     .pagination {
       display: flex;
+      flex-direction: row;
       justify-content: space-evenly;
       text-align: center;
       margin: 30px 0;

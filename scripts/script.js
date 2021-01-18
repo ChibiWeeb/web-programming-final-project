@@ -8,9 +8,11 @@ const sidebar = document.querySelector("aside")
 const dimmedOverlay = document.querySelector(".dimmed_overlay")
 
 const filterMenu = document.querySelector(".filter_menu")
-const filterItems = document.querySelectorAll(".filter_item")
-const filterCancelButton = document.querySelector(".filter_cancel_button")
-const filterApplyButton = document.querySelector(".filter_apply_button")
+const filterCountryDropdownSelect = document.querySelector("#countries")
+const filterCitiesDropdownSelect = document.querySelector("#cities")
+const filterTags = document.querySelectorAll(".filter_tag")
+const filterResetButton = document.querySelector("#filter_reset_button")
+const filterApplyButton = document.querySelector("#filter_apply_button")
 
 const hotelListArea = document.querySelector(".hotel_list")
 
@@ -18,8 +20,14 @@ const previousPage = document.querySelector(".previous_page")
 const nextPage = document.querySelector(".next_page")
 
 
-const filterItemValues = new Array(filterItems.length).fill(false)
-
+const filterTagValues = new Array(filterTags.length).fill(false)
+const filterDropdownOptions = {
+    "Georgia": ["Tbilisi", "Batumi", "Telavi", "Mestia"],
+    "Japan": ["Tokyo", "Kyoto", "Osaka", "Sapporo", "Hakodate", "Fukuoka", "Nara"],
+    "USA": ["New York", "Chicago", "New Orleans", "Los Angeles"],
+    "UK": ["London", "Edinburgh", "Manchester", "Liverpool"],
+    "France": ["Paris", "Marseille", "Nice"]
+}
 
 const hotelObjectStoreName = "hotelObjectStore"
 const hotelNumberOnEachPage = 20
@@ -30,6 +38,7 @@ let activePageNum = 1
 databaseInit()
 initialize()
 showHotelList()
+showDropdownOptions()
 
 function databaseInit() {
     let openRequest = indexedDB.open("hotelsDatabase", 1)
@@ -92,12 +101,12 @@ function initialize() {
         closeSidebar()
     })
 
-    for (let i = 0; i < filterItems.length; i++) {
-        filterItems[i].addEventListener("click", function () {
-            toggleFilterItem(i)
+    for (let i = 0; i < filterTags.length; i++) {
+        filterTags[i].addEventListener("click", function () {
+            toggleFilterTag(i)
         })
     }
-    filterCancelButton.addEventListener("click", cancelFilters)
+    filterResetButton.addEventListener("click", resetFilters)
     filterApplyButton.addEventListener("click", applyFilters)
 
     previousPage.addEventListener("click", goToPreviousPage)
@@ -126,23 +135,25 @@ function openFilterMenu() {
     filterMenu.style.top = "100px"
 }
 
-function toggleFilterItem(index) {
-    if (!filterItemValues[index]) {
-        filterItems[index].style.backgroundColor = "darkred"
-        filterItems[index].style.color = "white"
+function toggleFilterTag(index) {
+    if (!filterTagValues[index]) {
+        filterTags[index].style.backgroundColor = "darkred"
+        filterTags[index].style.color = "white"
     } else {
-        filterItems[index].style.backgroundColor = "black"
-        filterItems[index].style.color = "darkred"
+        filterTags[index].style.backgroundColor = "black"
+        filterTags[index].style.color = "darkred"
     }
-    filterItemValues[index] = !filterItemValues[index]
+    filterTagValues[index] = !filterTagValues[index]
 }
 
-function cancelFilters() {
-    filterItemValues.fill(false)
-    for (let i = 0; i < filterItems.length; i++) {
-        filterItems[i].style.backgroundColor = "black"
-        filterItems[i].style.color = "darkred"
+function resetFilters() {
+    filterTagValues.fill(false)
+    for (let i = 0; i < filterTags.length; i++) {
+        filterTags[i].style.backgroundColor = "black"
+        filterTags[i].style.color = "darkred"
     }
+    filterCountryDropdownSelect.value = ""
+    filterCitiesDropdownSelect.value = ""
 }
 
 function applyFilters() {
@@ -222,4 +233,17 @@ function goToPreviousPage() {
 function goToNextPage() {
     activePageNum++
     showHotelList()
+}
+
+function showDropdownOptions() {
+    for (let country in filterDropdownOptions) {
+        filterCountryDropdownSelect.options[filterCountryDropdownSelect.options.length] = new Option(country, country);
+        filterCountryDropdownSelect.onchange = function () {
+            filterCitiesDropdownSelect.length = 1
+            const cities = (filterDropdownOptions[filterCountryDropdownSelect.value])
+            for (let i = 0; i < cities.length; i++) {
+                filterCitiesDropdownSelect.options[filterCitiesDropdownSelect.options.length] = new Option(cities[i], cities[i]);
+            }
+        }
+    }
 }

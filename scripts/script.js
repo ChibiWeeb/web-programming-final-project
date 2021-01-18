@@ -1,38 +1,5 @@
-const html = document.querySelector("html")
-
-const logo = document.querySelector(".logo")
-const filterButton = document.querySelector(".filter_button")
-const profileButton = document.querySelector(".profile_button")
-
-const sidebar = document.querySelector("aside")
-const dimmedOverlay = document.querySelector(".dimmed_overlay")
-
-const filterMenu = document.querySelector(".filter_menu")
-const filterCountryDropdownSelect = document.querySelector("#countries")
-const filterCitiesDropdownSelect = document.querySelector("#cities")
-const filterTags = document.querySelectorAll(".filter_tag")
-const filterResetButton = document.querySelector("#filter_reset_button")
-const filterApplyButton = document.querySelector("#filter_apply_button")
-
-const hotelListArea = document.querySelector(".hotel_list")
-
-const previousPage = document.querySelector(".previous_page")
-const nextPage = document.querySelector(".next_page")
-
-
-const filterTagValues = new Array(filterTags.length).fill(false)
-const filterDropdownOptions = {
-    "Georgia": ["Tbilisi", "Batumi", "Telavi", "Mestia"],
-    "Japan": ["Tokyo", "Kyoto", "Osaka", "Sapporo", "Hakodate", "Fukuoka", "Nara"],
-    "USA": ["New York", "Chicago", "New Orleans", "Los Angeles"],
-    "UK": ["London", "Edinburgh", "Manchester", "Liverpool"],
-    "France": ["Paris", "Marseille", "Nice"]
-}
-
-const hotelObjectStoreName = "hotelObjectStore"
-const hotelNumberOnEachPage = 20
-
 let activePageNum = 1
+let hotelTotalNumber
 
 
 databaseInit()
@@ -54,16 +21,76 @@ function databaseInit() {
         let transaction = database.transaction(hotelObjectStoreName, "readwrite")
         let hotelObjectStore = transaction.objectStore(hotelObjectStoreName)
 
-        let hotelObject01 = new Hotel("name01", "https://i.picsum.photos/id/645/300/200.jpg?hmac=zSwhK0ipngA3Q8gPxiRsL3NGUmKtCy89EcH8zONvh8M")
-        let hotelObject02 = new Hotel("name02", "https://i.picsum.photos/id/78/300/200.jpg?hmac=n7Sj8aECCS5WoJkWO-zflsPVDeezs5U4M7WgQjLACA0")
-        let hotelObject03 = new Hotel("name03", "https://i.picsum.photos/id/641/300/200.jpg?hmac=YpOnhDuvo6GeXZPS8yR6Wf62YHrXGlWTDObszZf3zpI")
-        let hotelObject04 = new Hotel("name04", "https://i.picsum.photos/id/331/300/200.jpg?hmac=uIUrcfY5rEjbMirOCMEvEXzC0tIJzFIBfZBZ4qhvnd4")
-        let hotelObject05 = new Hotel("name05", "https://i.picsum.photos/id/816/300/200.jpg?hmac=LyDUxx5Jqqh7V5H3YZdOFIsgVEmG9IWw4H8Iwjfs46I")
-        let hotelObject06 = new Hotel("name06", "https://i.picsum.photos/id/721/300/200.jpg?hmac=a8J-TueLrN5E8F50mFD-1efhdFssR3Mj-FuuUHRpddY")
-        let hotelObject07 = new Hotel("name07", "https://i.picsum.photos/id/998/300/200.jpg?hmac=ABcJlM1FNcyP3AfTFRqfa64HxavGYS_EloO3wVKI6WY")
-        let hotelObject08 = new Hotel("name08", "https://i.picsum.photos/id/173/300/200.jpg?hmac=QNv1dkRQYgkul__n_maFKcC5QLE7zBly8z3gwr3SmI0")
-        let hotelObject09 = new Hotel("name09", "https://i.picsum.photos/id/203/300/200.jpg?hmac=FsCLTwngZ8-1jbxqdBKyoJy-ZHjbhlupNzeKiib04MI")
-        let hotelObject10 = new Hotel("name10", "https://i.picsum.photos/id/718/300/200.jpg?hmac=2AXNXV_A7Vmp-rOv8sWOWmRkGUZUJmc8pP3Gvsmu-PE")
+        let hotelObject01 = new Hotel(
+            "name01",
+            countryList.georgia.name,
+            countryList.georgia.cities.tbilisi,
+            [tagList.pool, tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.free_parking, tagList.underground_parking, tagList.vending_machines],
+            "https://i.picsum.photos/id/645/300/200.jpg?hmac=zSwhK0ipngA3Q8gPxiRsL3NGUmKtCy89EcH8zONvh8M"
+        )
+        let hotelObject02 = new Hotel(
+            "name02",
+            countryList.georgia.name,
+            countryList.georgia.cities.batumi,
+            [tagList.pool, tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.free_parking],
+            "https://i.picsum.photos/id/641/300/200.jpg?hmac=YpOnhDuvo6GeXZPS8yR6Wf62YHrXGlWTDObszZf3zpI"
+        )
+        let hotelObject03 = new Hotel(
+            "name03",
+            countryList.georgia.name,
+            countryList.georgia.cities.mestia,
+            [tagList.free_wifi, tagList.underground_parking, tagList.vending_machines],
+            "https://i.picsum.photos/id/78/300/200.jpg?hmac=n7Sj8aECCS5WoJkWO-zflsPVDeezs5U4M7WgQjLACA0"
+        )
+        let hotelObject04 = new Hotel(
+            "name04",
+            countryList.usa.name,
+            countryList.usa.cities.new_york,
+            [],
+            "https://i.picsum.photos/id/331/300/200.jpg?hmac=uIUrcfY5rEjbMirOCMEvEXzC0tIJzFIBfZBZ4qhvnd4"
+        )
+        let hotelObject05 = new Hotel(
+            "name05",
+            countryList.usa.name,
+            countryList.usa.cities.los_angeles,
+            [tagList.pool, tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.underground_parking],
+            "https://i.picsum.photos/id/816/300/200.jpg?hmac=LyDUxx5Jqqh7V5H3YZdOFIsgVEmG9IWw4H8Iwjfs46I"
+        )
+        let hotelObject06 = new Hotel(
+            "name06",
+            countryList.uk.name,
+            countryList.uk.cities.edinburgh,
+            [tagList.bar, tagList.free_wifi, tagList.free_parking, tagList.underground_parking, tagList.vending_machines],
+            "https://i.picsum.photos/id/721/300/200.jpg?hmac=a8J-TueLrN5E8F50mFD-1efhdFssR3Mj-FuuUHRpddY"
+        )
+        let hotelObject07 = new Hotel(
+            "name07",
+            countryList.france.name,
+            countryList.france.cities.paris,
+            [tagList.pool, tagList.gym, tagList.bar, tagList.free_parking],
+            "https://i.picsum.photos/id/998/300/200.jpg?hmac=ABcJlM1FNcyP3AfTFRqfa64HxavGYS_EloO3wVKI6WY"
+        )
+        let hotelObject08 = new Hotel(
+            "name08",
+            countryList.japan.name,
+            countryList.japan.cities.kyoto,
+            [tagList.pool, tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.free_parking, tagList.underground_parking, tagList.vending_machines],
+            "https://i.picsum.photos/id/173/300/200.jpg?hmac=QNv1dkRQYgkul__n_maFKcC5QLE7zBly8z3gwr3SmI0"
+        )
+        let hotelObject09 = new Hotel(
+            "name09",
+            countryList.japan.name,
+            countryList.japan.cities.nara,
+            [tagList.bar, tagList.free_wifi, tagList.free_parking, tagList.vending_machines],
+            "https://i.picsum.photos/id/203/300/200.jpg?hmac=FsCLTwngZ8-1jbxqdBKyoJy-ZHjbhlupNzeKiib04MI"
+        )
+        let hotelObject10 = new Hotel(
+            "name10",
+            countryList.georgia.name,
+            countryList.georgia.cities.mestia,
+            [tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.free_parking],
+            "https://i.picsum.photos/id/718/300/200.jpg?hmac=2AXNXV_A7Vmp-rOv8sWOWmRkGUZUJmc8pP3Gvsmu-PE"
+        )
 
         let addRequest = hotelObjectStore.add(hotelObject01)
         addRequest = hotelObjectStore.add(hotelObject02)
@@ -77,12 +104,18 @@ function databaseInit() {
         addRequest = hotelObjectStore.add(hotelObject10)
 
         for (let i = 11; i < 61; i++) {
-            let hotelObject = new Hotel("name" + i, "https://i.picsum.photos/id/718/300/200.jpg?hmac=2AXNXV_A7Vmp-rOv8sWOWmRkGUZUJmc8pP3Gvsmu-PE")
+            let hotelObject = new Hotel(
+                "name" + i,
+                countryList.japan.name,
+                countryList.japan.cities.sapporo,
+                [tagList.free_wifi, tagList.free_parking],
+                "https://i.picsum.photos/id/718/300/200.jpg?hmac=2AXNXV_A7Vmp-rOv8sWOWmRkGUZUJmc8pP3Gvsmu-PE"
+            )
             addRequest = hotelObjectStore.add(hotelObject)
         }
 
         addRequest.onerror = function () {
-            console.log("Add Request Error", addRequest.error)
+            console.error("Add Request Error", addRequest.error)
         }
     }
 
@@ -96,7 +129,7 @@ function initialize() {
     filterButton.addEventListener("click", openFilterMenu)
     profileButton.addEventListener("click", function () {
         openSidebar(200)
-    }) //TODO: maybe fade color in/out?
+    })
     dimmedOverlay.addEventListener("click", function () {
         closeSidebar()
     })
@@ -152,20 +185,39 @@ function resetFilters() {
         filterTags[i].style.backgroundColor = "black"
         filterTags[i].style.color = "darkred"
     }
-    filterCountryDropdownSelect.value = ""
+    filterCountriesDropdownSelect.value = ""
     filterCitiesDropdownSelect.value = ""
 }
 
 function applyFilters() {
     filterButton.src = "images/filter_icon.png"
     filterMenu.style.top = "-1000px"
+
+    showHotelList()
+    activePageNum = 1
 }
 
 function showHotelList() {
-    getHotels().then(function (hotels) {
-        const numberOfPages = (hotels.length % hotelNumberOnEachPage === 0) ?
-            (hotels.length / hotelNumberOnEachPage) :
-            (Math.floor(hotels.length / hotelNumberOnEachPage) + 1)
+    const selectedCountryName =
+        (filterCountriesDropdownSelect.options[filterCountriesDropdownSelect.selectedIndex].value === "") ?
+            undefined :
+            filterCountriesDropdownSelect.options[filterCountriesDropdownSelect.selectedIndex].text
+    const selectedCityName =
+        (filterCitiesDropdownSelect.options[filterCitiesDropdownSelect.selectedIndex].value === "") ?
+            undefined :
+            filterCitiesDropdownSelect.options[filterCitiesDropdownSelect.selectedIndex].text
+    let tags = []
+    for (let i = 0; i < filterTagValues.length; i++) {
+        if (filterTagValues[i]) {
+            tags.push(Object.values(tagList)[i])
+        }
+    }
+
+    getHotels(selectedCountryName, selectedCityName, tags).then(function (hotels) {
+        let numberOfPages = (hotelTotalNumber % hotelNumberOnEachPage === 0) ?
+            (hotelTotalNumber / hotelNumberOnEachPage) :
+            (Math.floor(hotelTotalNumber / hotelNumberOnEachPage) + 1)
+
         if (activePageNum < 1) {
             activePageNum = 1
         } else if (activePageNum > numberOfPages) {
@@ -183,21 +235,34 @@ function showHotelList() {
     })
 }
 
-function getHotels() {
+function getHotels(countryName, cityName, tags) {
     return new Promise(function (resolve) {
         let openRequest = indexedDB.open("hotelsDatabase", 1)
         openRequest.onsuccess = function () {
             let database = openRequest.result
             let transaction = database.transaction(hotelObjectStoreName)
             let hotelObjectStore = transaction.objectStore(hotelObjectStoreName)
-
             let getRequest = hotelObjectStore.getAll()
+
             getRequest.onsuccess = function () {
-                resolve(getRequest.result)
+                if (hotelTotalNumber === undefined) hotelTotalNumber = getRequest.result.length
+                let result = getRequest.result
+
+                if (countryName !== undefined) {
+                    result = result.filter(hotel => (hotel.country === countryName))
+                }
+                if (cityName !== undefined) {
+                    result = result.filter(hotel => (hotel.city === cityName))
+                }
+                if (tags.length !== 0) {
+                    result = result.filter(hotel => (tags.every(tag => hotel.tags.includes(tag))))
+                }
+
+                resolve(result)
             }
 
             getRequest.onerror = function () {
-                console.log("Get Request Error", getRequest.error)
+                console.error("Get Request Error", getRequest.error)
             }
         }
 
@@ -217,10 +282,34 @@ function makeHotelDiv(hotelObj) {
     hotelNameElement.appendChild(document.createTextNode(hotelObj.name))
     wrapper.appendChild(hotelNameElement)
 
+    const hotelCountryElement = document.createElement("h4")
+    hotelCountryElement.style.textAlign = "center"
+    hotelCountryElement.style.userSelect = "none"
+    hotelCountryElement.appendChild(document.createTextNode(hotelObj.country))
+    wrapper.appendChild(hotelCountryElement)
+
+    const hotelCityElement = document.createElement("h5")
+    hotelCityElement.style.textAlign = "center"
+    hotelCityElement.style.userSelect = "none"
+    hotelCityElement.appendChild(document.createTextNode(hotelObj.city))
+    wrapper.appendChild(hotelCityElement)
+
     const image = document.createElement("img")
     image.setAttribute("src", hotelObj.imageURL)
     image.style.margin = "0 20px 25px"
     wrapper.appendChild(image)
+
+    const hotelTagsElement = document.createElement("p")
+    hotelTagsElement.style.textAlign = "center"
+    hotelTagsElement.style.userSelect = "none"
+    if (hotelObj.tags.length > 0) {
+        let i = 0
+        for (; i < hotelObj.tags.length - 1; i++) {
+            hotelTagsElement.appendChild(document.createTextNode(hotelObj.tags[i] + ", "))
+        }
+        hotelTagsElement.appendChild(document.createTextNode(hotelObj.tags[i] + "."))
+        wrapper.appendChild(hotelTagsElement)
+    }
 
     hotelListArea.appendChild(wrapper)
 }
@@ -236,13 +325,19 @@ function goToNextPage() {
 }
 
 function showDropdownOptions() {
-    for (let country in filterDropdownOptions) {
-        filterCountryDropdownSelect.options[filterCountryDropdownSelect.options.length] = new Option(country, country);
-        filterCountryDropdownSelect.onchange = function () {
+    for (let i = 0; i < filterDropdownOptions.length; i++) {
+        const country = filterDropdownOptions[i]
+        filterCountriesDropdownSelect.options[filterCountriesDropdownSelect.options.length] = new Option(country.name, country.index)
+        filterCountriesDropdownSelect.onchange = function () {
             filterCitiesDropdownSelect.length = 1
-            const cities = (filterDropdownOptions[filterCountryDropdownSelect.value])
-            for (let i = 0; i < cities.length; i++) {
-                filterCitiesDropdownSelect.options[filterCitiesDropdownSelect.options.length] = new Option(cities[i], cities[i]);
+            if (filterCountriesDropdownSelect.value !== "") {
+                const citiProperties = filterDropdownOptions[filterCountriesDropdownSelect.value].cities
+                for (let cityProperty in citiProperties) {
+                    if (citiProperties.hasOwnProperty(cityProperty)) {
+                        const city = citiProperties[cityProperty]
+                        filterCitiesDropdownSelect.options[filterCitiesDropdownSelect.options.length] = new Option(city, city)
+                    }
+                }
             }
         }
     }

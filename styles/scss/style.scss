@@ -26,6 +26,7 @@ html {
 
       img {
         cursor: pointer;
+        user-select: none;
       }
     }
 
@@ -136,6 +137,30 @@ html {
       justify-items: center;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       grid-auto-rows: auto;
+
+      .hotel_expanded {
+        position: fixed;
+        top: 50px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+
+        .close_button {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 60px;
+          height: 35px;
+          line-height: 35px;
+          cursor: pointer;
+          user-select: none;
+          text-align: center;
+          vertical-align: middle;
+          color: #bcbcbc;
+          background-color: #de0a0a;
+        }
+      }
     }
 
     .pagination {

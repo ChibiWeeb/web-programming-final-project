@@ -88,7 +88,7 @@ function databaseInit() {
             "name10",
             countryList.georgia.name,
             countryList.georgia.cities.mestia,
-            [tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.free_parking],
+            [tagList.free_parking],
             "https://i.picsum.photos/id/718/300/200.jpg?hmac=2AXNXV_A7Vmp-rOv8sWOWmRkGUZUJmc8pP3Gvsmu-PE"
         )
 
@@ -144,6 +144,19 @@ function initialize() {
 
     previousPage.addEventListener("click", goToPreviousPage)
     nextPage.addEventListener("click", goToNextPage)
+
+    document.addEventListener("click", function (e) {
+        if (e.target) {
+            let targetedHotel
+            if (e.target.className === "hotel") {
+                targetedHotel = e.target
+            } else if (e.target.parentNode.className === "hotel") {
+                targetedHotel = e.target.parentNode
+            }
+
+            if (targetedHotel !== undefined) expandHotel(targetedHotel)
+        }
+    })
 }
 
 function scrollToTop() {
@@ -159,7 +172,7 @@ function openSidebar(width) {
 
 function closeSidebar() {
     sidebar.style.width = "0"
-    html.style.overflow = "visible"
+    html.style.overflow = "auto"
     dimmedOverlay.style.display = "none"
 }
 
@@ -273,31 +286,30 @@ function getHotels(countryName, cityName, tags) {
 }
 
 function makeHotelDiv(hotelObj) {
-    const wrapper = document.createElement("div")
-    wrapper.style.backgroundColor = "orange"
+    const hotelWrapper = document.createElement("div")
+    hotelWrapper.setAttribute("class", "hotel")
+    hotelWrapper.setAttribute("id", "hotel_" + hotelObj.name)
+    hotelWrapper.style.display = "flex"
+    hotelWrapper.style.flexDirection = "column"
+    hotelWrapper.style.alignItems = "center"
+    hotelWrapper.style.backgroundColor = "orange"
 
     const hotelNameElement = document.createElement("h1")
-    hotelNameElement.style.textAlign = "center"
     hotelNameElement.style.userSelect = "none"
     hotelNameElement.appendChild(document.createTextNode(hotelObj.name))
-    wrapper.appendChild(hotelNameElement)
+    hotelWrapper.appendChild(hotelNameElement)
 
-    const hotelCountryElement = document.createElement("h4")
-    hotelCountryElement.style.textAlign = "center"
-    hotelCountryElement.style.userSelect = "none"
-    hotelCountryElement.appendChild(document.createTextNode(hotelObj.country))
-    wrapper.appendChild(hotelCountryElement)
-
-    const hotelCityElement = document.createElement("h5")
-    hotelCityElement.style.textAlign = "center"
-    hotelCityElement.style.userSelect = "none"
-    hotelCityElement.appendChild(document.createTextNode(hotelObj.city))
-    wrapper.appendChild(hotelCityElement)
+    const hotelCountryAndCityElement = document.createElement("h4")
+    hotelCountryAndCityElement.style.textAlign = "center"
+    hotelCountryAndCityElement.style.userSelect = "none"
+    hotelCountryAndCityElement.appendChild(document.createTextNode(hotelObj.country + ", " + hotelObj.city))
+    hotelWrapper.appendChild(hotelCountryAndCityElement)
 
     const image = document.createElement("img")
     image.setAttribute("src", hotelObj.imageURL)
     image.style.margin = "0 20px 25px"
-    wrapper.appendChild(image)
+    image.style.userSelect = "none"
+    hotelWrapper.appendChild(image)
 
     const hotelTagsElement = document.createElement("p")
     hotelTagsElement.style.textAlign = "center"
@@ -307,11 +319,11 @@ function makeHotelDiv(hotelObj) {
         for (; i < hotelObj.tags.length - 1; i++) {
             hotelTagsElement.appendChild(document.createTextNode(hotelObj.tags[i] + ", "))
         }
-        hotelTagsElement.appendChild(document.createTextNode(hotelObj.tags[i] + "."))
-        wrapper.appendChild(hotelTagsElement)
+        hotelTagsElement.appendChild(document.createTextNode(hotelObj.tags[i]))
+        hotelWrapper.appendChild(hotelTagsElement)
     }
 
-    hotelListArea.appendChild(wrapper)
+    hotelListArea.appendChild(hotelWrapper)
 }
 
 function goToPreviousPage() {
@@ -341,4 +353,65 @@ function showDropdownOptions() {
             }
         }
     }
+}
+
+function expandHotel(hotelElement) {
+    hotelElement.classList.add("hotel_expanded")
+    html.style.overflow = "hidden"
+    logo.style.cursor = "default"
+    filterButton.style.cursor = "default"
+    logo.removeEventListener("click", scrollToTop)
+    filterButton.removeEventListener("click", openFilterMenu)
+
+    let closeButton = document.createElement("div")
+    closeButton.classList.add("close_button")
+    closeButton.appendChild(document.createTextNode("Close"))
+    hotelElement.appendChild(closeButton)
+
+    hotelElement.appendChild(document.createTextNode(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum massa tincidunt urna vulputate eleifend eget sit amet diam. Suspendisse potenti. Maecenas luctus blandit ex, non aliquet eros convallis et. Nam ut aliquam nisl. Fusce fermentum sem lorem, et vehicula lorem finibus non. In interdum augue eget elit interdum, sit amet varius lacus viverra. Aliquam convallis volutpat faucibus.
+
+Curabitur lobortis ex nec nisi ornare, non venenatis enim dictum. Praesent auctor, metus eu pretium elementum, purus elit euismod felis, sit amet feugiat lectus enim sed risus. Maecenas cursus libero non velit viverra sollicitudin. Cras aliquet nibh vel dui ultrices, sit amet auctor sapien gravida. Integer sodales, massa ut congue tempor, lacus lacus tempor ante, a pretium tortor augue eu ligula. Praesent tempus arcu ac ante ornare eleifend. Nullam sed tincidunt dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas blandit ex non rhoncus fringilla.
+
+Donec ut mollis nisi. Donec quis vulputate lorem, eu bibendum massa. Quisque a auctor magna, quis bibendum sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc faucibus maximus ipsum, a accumsan nibh dictum ut. Fusce vel suscipit lorem. Etiam convallis, dolor non venenatis egestas, felis diam fermentum purus, auctor placerat justo neque eget nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In tristique ipsum lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed id ullamcorper nunc, non venenatis est. Quisque et gravida sem, sodales fermentum est.
+
+Donec facilisis tortor tincidunt, eleifend libero ultrices, efficitur ante. Ut id urna consectetur, tristique tortor sit amet, pellentesque sapien. Aliquam ut augue augue. Aenean vulputate sapien ut imperdiet suscipit. Nam odio neque, viverra at ligula nec, ultricies eleifend orci. Suspendisse ullamcorper sagittis euismod. Integer sit amet nibh dignissim, dignissim est vitae, lobortis quam. Mauris blandit, nibh at accumsan ultrices, magna est scelerisque dolor, at vestibulum sapien erat in erat.
+
+In vel sodales sapien, vitae varius mi. Nulla aliquam vestibulum purus. Nam commodo enim non tortor tincidunt imperdiet. Suspendisse in lorem imperdiet, feugiat augue id, placerat neque. Vivamus risus diam, aliquet ut nulla vel, placerat convallis tortor. Suspendisse potenti. Proin faucibus at libero quis euismod. Nulla id nulla eu lacus consectetur consequat quis a metus. Nunc euismod efficitur molestie. Nam ligula mi, rutrum nec dignissim id, posuere eu magna. Integer semper scelerisque nisl, a elementum nulla dignissim id. Fusce nibh nisi, tempor mollis varius in, eleifend sit amet enim. Quisque condimentum nisi ut nisl fermentum porta. Nunc aliquet eros nec fringilla feugiat.
+
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum massa tincidunt urna vulputate eleifend eget sit amet diam. Suspendisse potenti. Maecenas luctus blandit ex, non aliquet eros convallis et. Nam ut aliquam nisl. Fusce fermentum sem lorem, et vehicula lorem finibus non. In interdum augue eget elit interdum, sit amet varius lacus viverra. Aliquam convallis volutpat faucibus.
+
+Curabitur lobortis ex nec nisi ornare, non venenatis enim dictum. Praesent auctor, metus eu pretium elementum, purus elit euismod felis, sit amet feugiat lectus enim sed risus. Maecenas cursus libero non velit viverra sollicitudin. Cras aliquet nibh vel dui ultrices, sit amet auctor sapien gravida. Integer sodales, massa ut congue tempor, lacus lacus tempor ante, a pretium tortor augue eu ligula. Praesent tempus arcu ac ante ornare eleifend. Nullam sed tincidunt dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas blandit ex non rhoncus fringilla.
+
+Donec ut mollis nisi. Donec quis vulputate lorem, eu bibendum massa. Quisque a auctor magna, quis bibendum sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc faucibus maximus ipsum, a accumsan nibh dictum ut. Fusce vel suscipit lorem. Etiam convallis, dolor non venenatis egestas, felis diam fermentum purus, auctor placerat justo neque eget nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In tristique ipsum lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed id ullamcorper nunc, non venenatis est. Quisque et gravida sem, sodales fermentum est.
+
+Donec facilisis tortor tincidunt, eleifend libero ultrices, efficitur ante. Ut id urna consectetur, tristique tortor sit amet, pellentesque sapien. Aliquam ut augue augue. Aenean vulputate sapien ut imperdiet suscipit. Nam odio neque, viverra at ligula nec, ultricies eleifend orci. Suspendisse ullamcorper sagittis euismod. Integer sit amet nibh dignissim, dignissim est vitae, lobortis quam. Mauris blandit, nibh at accumsan ultrices, magna est scelerisque dolor, at vestibulum sapien erat in erat.
+
+In vel sodales sapien, vitae varius mi. Nulla aliquam vestibulum purus. Nam commodo enim non tortor tincidunt imperdiet. Suspendisse in lorem imperdiet, feugiat augue id, placerat neque. Vivamus risus diam, aliquet ut nulla vel, placerat convallis tortor. Suspendisse potenti. Proin faucibus at libero quis euismod. Nulla id nulla eu lacus consectetur consequat quis a metus. Nunc euismod efficitur molestie. Nam ligula mi, rutrum nec dignissim id, posuere eu magna. Integer semper scelerisque nisl, a elementum nulla dignissim id. Fusce nibh nisi, tempor mollis varius in, eleifend sit amet enim. Quisque condimentum nisi ut nisl fermentum porta. Nunc aliquet eros nec fringilla feugiat.
+
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum massa tincidunt urna vulputate eleifend eget sit amet diam. Suspendisse potenti. Maecenas luctus blandit ex, non aliquet eros convallis et. Nam ut aliquam nisl. Fusce fermentum sem lorem, et vehicula lorem finibus non. In interdum augue eget elit interdum, sit amet varius lacus viverra. Aliquam convallis volutpat faucibus.
+
+Curabitur lobortis ex nec nisi ornare, non venenatis enim dictum. Praesent auctor, metus eu pretium elementum, purus elit euismod felis, sit amet feugiat lectus enim sed risus. Maecenas cursus libero non velit viverra sollicitudin. Cras aliquet nibh vel dui ultrices, sit amet auctor sapien gravida. Integer sodales, massa ut congue tempor, lacus lacus tempor ante, a pretium tortor augue eu ligula. Praesent tempus arcu ac ante ornare eleifend. Nullam sed tincidunt dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas blandit ex non rhoncus fringilla.
+
+Donec ut mollis nisi. Donec quis vulputate lorem, eu bibendum massa. Quisque a auctor magna, quis bibendum sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc faucibus maximus ipsum, a accumsan nibh dictum ut. Fusce vel suscipit lorem. Etiam convallis, dolor non venenatis egestas, felis diam fermentum purus, auctor placerat justo neque eget nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In tristique ipsum lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed id ullamcorper nunc, non venenatis est. Quisque et gravida sem, sodales fermentum est.
+
+Donec facilisis tortor tincidunt, eleifend libero ultrices, efficitur ante. Ut id urna consectetur, tristique tortor sit amet, pellentesque sapien. Aliquam ut augue augue. Aenean vulputate sapien ut imperdiet suscipit. Nam odio neque, viverra at ligula nec, ultricies eleifend orci. Suspendisse ullamcorper sagittis euismod. Integer sit amet nibh dignissim, dignissim est vitae, lobortis quam. Mauris blandit, nibh at accumsan ultrices, magna est scelerisque dolor, at vestibulum sapien erat in erat.
+
+In vel sodales sapien, vitae varius mi. Nulla aliquam vestibulum purus. Nam commodo enim non tortor tincidunt imperdiet. Suspendisse in lorem imperdiet, feugiat augue id, placerat neque. Vivamus risus diam, aliquet ut nulla vel, placerat convallis tortor. Suspendisse potenti. Proin faucibus at libero quis euismod. Nulla id nulla eu lacus consectetur consequat quis a metus. Nunc euismod efficitur molestie. Nam ligula mi, rutrum nec dignissim id, posuere eu magna. Integer semper scelerisque nisl, a elementum nulla dignissim id. Fusce nibh nisi, tempor mollis varius in, eleifend sit amet enim. Quisque condimentum nisi ut nisl fermentum porta. Nunc aliquet eros nec fringilla feugiat.`))
+    closeButton.addEventListener("click", function () {
+        closeButton.classList.remove("close_button")
+        collapseHotel(hotelElement)
+    })
+}
+
+function collapseHotel(hotelElement) {
+    hotelElement.removeChild(hotelElement.lastChild)
+    hotelElement.removeChild(hotelElement.lastChild)
+    hotelElement.classList.remove("hotel_expanded")
+    html.style.overflow = "auto"
+    logo.addEventListener("click", scrollToTop)
+    filterButton.addEventListener("click", openFilterMenu)
+    logo.style.cursor = "pointer"
+    filterButton.style.cursor = "pointer"
 }

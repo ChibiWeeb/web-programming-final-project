@@ -42,6 +42,7 @@ html body .filter_menu .filter_dropdowns_wrapper .filter_dropdown {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  user-select: none;
 }
 html body .filter_menu .filter_dropdowns_wrapper .filter_dropdown select {
   height: 30px;
@@ -114,6 +115,12 @@ html body .hotel_list {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-auto-rows: auto;
 }
+html body .hotel_list .close_button {
+  display: none;
+}
+html body .hotel_list .hotel_description {
+  display: none;
+}
 html body .hotel_list .hotel_expanded {
   position: fixed;
   top: 50px;
@@ -123,8 +130,9 @@ html body .hotel_list .hotel_expanded {
   overflow: auto;
 }
 html body .hotel_list .hotel_expanded .close_button {
-  position: absolute;
-  top: 0;
+  display: block;
+  position: fixed;
+  top: 50px;
   right: 0;
   width: 60px;
   height: 35px;
@@ -135,6 +143,12 @@ html body .hotel_list .hotel_expanded .close_button {
   vertical-align: middle;
   color: #bcbcbc;
   background-color: #de0a0a;
+}
+html body .hotel_list .hotel_expanded .hotel_description {
+  display: block;
+  margin: 10px 20px;
+  width: 85%;
+  user-select: none;
 }
 html body .pagination {
   display: flex;

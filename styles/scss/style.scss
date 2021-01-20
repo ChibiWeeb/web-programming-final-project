@@ -53,6 +53,7 @@ html {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
+          user-select: none;
 
           select {
             height: 30px;
@@ -138,6 +139,14 @@ html {
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       grid-auto-rows: auto;
 
+      .close_button {
+        display: none;
+      }
+
+      .hotel_description {
+        display: none;
+      }
+
       .hotel_expanded {
         position: fixed;
         top: 50px;
@@ -147,8 +156,9 @@ html {
         overflow: auto;
 
         .close_button {
-          position: absolute;
-          top: 0;
+          display: block;
+          position: fixed;
+          top: $navbar-height;
           right: 0;
           width: 60px;
           height: 35px;
@@ -159,6 +169,13 @@ html {
           vertical-align: middle;
           color: #bcbcbc;
           background-color: #de0a0a;
+        }
+
+        .hotel_description {
+          display: block;
+          margin: 10px 20px;
+          width: 85%;
+          user-select: none;
         }
       }
     }

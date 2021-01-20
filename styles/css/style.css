@@ -119,7 +119,7 @@ html body .hotel_list .hotel_expanded {
   top: 50px;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 50px);
   overflow: auto;
 }
 html body .hotel_list .hotel_expanded .close_button {

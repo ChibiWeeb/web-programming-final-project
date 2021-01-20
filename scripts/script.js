@@ -307,11 +307,14 @@ function makeHotelDiv(hotelObj) {
 
     const image = document.createElement("img")
     image.setAttribute("src", hotelObj.imageURL)
+    image.style.width = "300px"
+    image.style.height = "200px"
     image.style.margin = "0 20px 25px"
     image.style.userSelect = "none"
     hotelWrapper.appendChild(image)
 
     const hotelTagsElement = document.createElement("p")
+    hotelTagsElement.style.width = "300px"
     hotelTagsElement.style.textAlign = "center"
     hotelTagsElement.style.userSelect = "none"
     if (hotelObj.tags.length > 0) {
@@ -368,7 +371,8 @@ function expandHotel(hotelElement) {
     closeButton.appendChild(document.createTextNode("Close"))
     hotelElement.appendChild(closeButton)
 
-    hotelElement.appendChild(document.createTextNode(`Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum massa tincidunt urna vulputate eleifend eget sit amet diam. Suspendisse potenti. Maecenas luctus blandit ex, non aliquet eros convallis et. Nam ut aliquam nisl. Fusce fermentum sem lorem, et vehicula lorem finibus non. In interdum augue eget elit interdum, sit amet varius lacus viverra. Aliquam convallis volutpat faucibus.
+    let description = document.createElement("p")
+    description.appendChild(document.createTextNode(`111111. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum massa tincidunt urna vulputate eleifend eget sit amet diam. Suspendisse potenti. Maecenas luctus blandit ex, non aliquet eros convallis et. Nam ut aliquam nisl. Fusce fermentum sem lorem, et vehicula lorem finibus non. In interdum augue eget elit interdum, sit amet varius lacus viverra. Aliquam convallis volutpat faucibus.
 
 Curabitur lobortis ex nec nisi ornare, non venenatis enim dictum. Praesent auctor, metus eu pretium elementum, purus elit euismod felis, sit amet feugiat lectus enim sed risus. Maecenas cursus libero non velit viverra sollicitudin. Cras aliquet nibh vel dui ultrices, sit amet auctor sapien gravida. Integer sodales, massa ut congue tempor, lacus lacus tempor ante, a pretium tortor augue eu ligula. Praesent tempus arcu ac ante ornare eleifend. Nullam sed tincidunt dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas blandit ex non rhoncus fringilla.
 
@@ -379,7 +383,7 @@ Donec facilisis tortor tincidunt, eleifend libero ultrices, efficitur ante. Ut i
 In vel sodales sapien, vitae varius mi. Nulla aliquam vestibulum purus. Nam commodo enim non tortor tincidunt imperdiet. Suspendisse in lorem imperdiet, feugiat augue id, placerat neque. Vivamus risus diam, aliquet ut nulla vel, placerat convallis tortor. Suspendisse potenti. Proin faucibus at libero quis euismod. Nulla id nulla eu lacus consectetur consequat quis a metus. Nunc euismod efficitur molestie. Nam ligula mi, rutrum nec dignissim id, posuere eu magna. Integer semper scelerisque nisl, a elementum nulla dignissim id. Fusce nibh nisi, tempor mollis varius in, eleifend sit amet enim. Quisque condimentum nisi ut nisl fermentum porta. Nunc aliquet eros nec fringilla feugiat.
 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum massa tincidunt urna vulputate eleifend eget sit amet diam. Suspendisse potenti. Maecenas luctus blandit ex, non aliquet eros convallis et. Nam ut aliquam nisl. Fusce fermentum sem lorem, et vehicula lorem finibus non. In interdum augue eget elit interdum, sit amet varius lacus viverra. Aliquam convallis volutpat faucibus.
+22222222. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum massa tincidunt urna vulputate eleifend eget sit amet diam. Suspendisse potenti. Maecenas luctus blandit ex, non aliquet eros convallis et. Nam ut aliquam nisl. Fusce fermentum sem lorem, et vehicula lorem finibus non. In interdum augue eget elit interdum, sit amet varius lacus viverra. Aliquam convallis volutpat faucibus.
 
 Curabitur lobortis ex nec nisi ornare, non venenatis enim dictum. Praesent auctor, metus eu pretium elementum, purus elit euismod felis, sit amet feugiat lectus enim sed risus. Maecenas cursus libero non velit viverra sollicitudin. Cras aliquet nibh vel dui ultrices, sit amet auctor sapien gravida. Integer sodales, massa ut congue tempor, lacus lacus tempor ante, a pretium tortor augue eu ligula. Praesent tempus arcu ac ante ornare eleifend. Nullam sed tincidunt dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas blandit ex non rhoncus fringilla.
 
@@ -390,7 +394,17 @@ Donec facilisis tortor tincidunt, eleifend libero ultrices, efficitur ante. Ut i
 In vel sodales sapien, vitae varius mi. Nulla aliquam vestibulum purus. Nam commodo enim non tortor tincidunt imperdiet. Suspendisse in lorem imperdiet, feugiat augue id, placerat neque. Vivamus risus diam, aliquet ut nulla vel, placerat convallis tortor. Suspendisse potenti. Proin faucibus at libero quis euismod. Nulla id nulla eu lacus consectetur consequat quis a metus. Nunc euismod efficitur molestie. Nam ligula mi, rutrum nec dignissim id, posuere eu magna. Integer semper scelerisque nisl, a elementum nulla dignissim id. Fusce nibh nisi, tempor mollis varius in, eleifend sit amet enim. Quisque condimentum nisi ut nisl fermentum porta. Nunc aliquet eros nec fringilla feugiat.
 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum massa tincidunt urna vulputate eleifend eget sit amet diam. Suspendisse potenti. Maecenas luctus blandit ex, non aliquet eros convallis et. Nam ut aliquam nisl. Fusce fermentum sem lorem, et vehicula lorem finibus non. In interdum augue eget elit interdum, sit amet varius lacus viverra. Aliquam convallis volutpat faucibus.
+33333333. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum massa tincidunt urna vulputate eleifend eget sit amet diam. Suspendisse potenti. Maecenas luctus blandit ex, non aliquet eros convallis et. Nam ut aliquam nisl. Fusce fermentum sem lorem, et vehicula lorem finibus non. In interdum augue eget elit interdum, sit amet varius lacus viverra. Aliquam convallis volutpat faucibus.
+
+Curabitur lobortis ex nec nisi ornare, non venenatis enim dictum. Praesent auctor, metus eu pretium elementum, purus elit euismod felis, sit amet feugiat lectus enim sed risus. Maecenas cursus libero non velit viverra sollicitudin. Cras aliquet nibh vel dui ultrices, sit amet auctor sapien gravida. Integer sodales, massa ut congue tempor, lacus lacus tempor ante, a pretium tortor augue eu ligula. Praesent tempus arcu ac ante ornare eleifend. Nullam sed tincidunt dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas blandit ex non rhoncus fringilla.
+
+Donec ut mollis nisi. Donec quis vulputate lorem, eu bibendum massa. Quisque a auctor magna, quis bibendum sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nunc faucibus maximus ipsum, a accumsan nibh dictum ut. Fusce vel suscipit lorem. Etiam convallis, dolor non venenatis egestas, felis diam fermentum purus, auctor placerat justo neque eget nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In tristique ipsum lorem. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed id ullamcorper nunc, non venenatis est. Quisque et gravida sem, sodales fermentum est.
+
+Donec facilisis tortor tincidunt, eleifend libero ultrices, efficitur ante. Ut id urna consectetur, tristique tortor sit amet, pellentesque sapien. Aliquam ut augue augue. Aenean vulputate sapien ut imperdiet suscipit. Nam odio neque, viverra at ligula nec, ultricies eleifend orci. Suspendisse ullamcorper sagittis euismod. Integer sit amet nibh dignissim, dignissim est vitae, lobortis quam. Mauris blandit, nibh at accumsan ultrices, magna est scelerisque dolor, at vestibulum sapien erat in erat.
+
+In vel sodales sapien, vitae varius mi. Nulla aliquam vestibulum purus. Nam commodo enim non tortor tincidunt imperdiet. Suspendisse in lorem imperdiet, feugiat augue id, placerat neque. Vivamus risus diam, aliquet ut nulla vel, placerat convallis tortor. Suspendisse potenti. Proin faucibus at libero quis euismod. Nulla id nulla eu lacus consectetur consequat quis a metus. Nunc euismod efficitur molestie. Nam ligula mi, rutrum nec dignissim id, posuere eu magna. Integer semper scelerisque nisl, a elementum nulla dignissim id. Fusce nibh nisi, tempor mollis varius in, eleifend sit amet enim. Quisque condimentum nisi ut nisl fermentum porta. Nunc aliquet eros nec fringilla feugiat.
+
+44444444. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elementum massa tincidunt urna vulputate eleifend eget sit amet diam. Suspendisse potenti. Maecenas luctus blandit ex, non aliquet eros convallis et. Nam ut aliquam nisl. Fusce fermentum sem lorem, et vehicula lorem finibus non. In interdum augue eget elit interdum, sit amet varius lacus viverra. Aliquam convallis volutpat faucibus.
 
 Curabitur lobortis ex nec nisi ornare, non venenatis enim dictum. Praesent auctor, metus eu pretium elementum, purus elit euismod felis, sit amet feugiat lectus enim sed risus. Maecenas cursus libero non velit viverra sollicitudin. Cras aliquet nibh vel dui ultrices, sit amet auctor sapien gravida. Integer sodales, massa ut congue tempor, lacus lacus tempor ante, a pretium tortor augue eu ligula. Praesent tempus arcu ac ante ornare eleifend. Nullam sed tincidunt dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas blandit ex non rhoncus fringilla.
 
@@ -399,6 +413,8 @@ Donec ut mollis nisi. Donec quis vulputate lorem, eu bibendum massa. Quisque a a
 Donec facilisis tortor tincidunt, eleifend libero ultrices, efficitur ante. Ut id urna consectetur, tristique tortor sit amet, pellentesque sapien. Aliquam ut augue augue. Aenean vulputate sapien ut imperdiet suscipit. Nam odio neque, viverra at ligula nec, ultricies eleifend orci. Suspendisse ullamcorper sagittis euismod. Integer sit amet nibh dignissim, dignissim est vitae, lobortis quam. Mauris blandit, nibh at accumsan ultrices, magna est scelerisque dolor, at vestibulum sapien erat in erat.
 
 In vel sodales sapien, vitae varius mi. Nulla aliquam vestibulum purus. Nam commodo enim non tortor tincidunt imperdiet. Suspendisse in lorem imperdiet, feugiat augue id, placerat neque. Vivamus risus diam, aliquet ut nulla vel, placerat convallis tortor. Suspendisse potenti. Proin faucibus at libero quis euismod. Nulla id nulla eu lacus consectetur consequat quis a metus. Nunc euismod efficitur molestie. Nam ligula mi, rutrum nec dignissim id, posuere eu magna. Integer semper scelerisque nisl, a elementum nulla dignissim id. Fusce nibh nisi, tempor mollis varius in, eleifend sit amet enim. Quisque condimentum nisi ut nisl fermentum porta. Nunc aliquet eros nec fringilla feugiat.`))
+    hotelElement.appendChild(description)
+
     closeButton.addEventListener("click", function () {
         closeButton.classList.remove("close_button")
         collapseHotel(hotelElement)

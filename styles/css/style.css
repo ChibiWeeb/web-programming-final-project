@@ -1,9 +1,43 @@
+@media only screen and (max-width: 600px) {
+  .hotel_name {
+    margin-top: 50px;
+  }
+
+  .room_wrapper {
+    grid-template-areas: "image image" "name name" "info info" "price button" !important;
+  }
+  .room_wrapper .room_image {
+    justify-self: center !important;
+  }
+  .room_wrapper .room_info {
+    margin: 10px 0 20px !important;
+  }
+  .room_wrapper .room_price {
+    justify-self: start !important;
+    align-self: center !important;
+  }
+  .room_wrapper .reserve_button {
+    justify-self: end !important;
+    align-self: center !important;
+  }
+}
 html {
   scroll-behavior: smooth;
   overflow-y: visible;
 }
 html body {
   margin: 50px 0 0 0;
+}
+html body .square_button {
+  width: 80px;
+  height: 40px;
+  line-height: 40px;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 10px;
+  color: #bcbcbc;
 }
 html body nav {
   display: flex;
@@ -65,26 +99,16 @@ html body .filter_menu .filter_tags_wrapper .filter_tag {
   background-color: black;
   color: #8b0000;
 }
-html body .filter_menu .filter_buttons_wrapper {
+html body .filter_menu .filter_menu_buttons_wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   margin-bottom: 20px;
 }
-html body .filter_menu .filter_buttons_wrapper .filter_button {
-  width: 60px;
-  height: 35px;
-  line-height: 35px;
-  cursor: pointer;
-  user-select: none;
-  text-align: center;
-  vertical-align: middle;
-  color: #bcbcbc;
-}
-html body .filter_menu .filter_buttons_wrapper #filter_reset_button {
+html body .filter_menu .filter_menu_buttons_wrapper #filter_reset_button {
   background-color: #de0a0a;
 }
-html body .filter_menu .filter_buttons_wrapper #filter_apply_button {
+html body .filter_menu .filter_menu_buttons_wrapper #filter_apply_button {
   background-color: #316d2d;
 }
 html body aside {
@@ -115,10 +139,34 @@ html body .hotel_list {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-auto-rows: auto;
 }
-html body .hotel_list .close_button {
+html body .hotel_list .hotel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: orange;
+}
+html body .hotel_list .hotel * {
+  user-select: none;
+}
+html body .hotel_list .hotel .country_and_city_wrapper {
+  text-align: center;
+}
+html body .hotel_list .hotel .hotel_image {
+  width: 300px;
+  height: 200px;
+  margin: 0 20px 25px;
+}
+html body .hotel_list .hotel .hotel_tags {
+  width: 300px;
+  text-align: center;
+}
+html body .hotel_list .hotel .close_button {
   display: none;
 }
-html body .hotel_list .hotel_description {
+html body .hotel_list .hotel .hotel_description {
+  display: none;
+}
+html body .hotel_list .hotel .room_list {
   display: none;
 }
 html body .hotel_list .hotel_expanded {
@@ -131,33 +179,60 @@ html body .hotel_list .hotel_expanded {
 }
 html body .hotel_list .hotel_expanded .close_button {
   display: block;
-  position: fixed;
-  top: 50px;
-  right: 0;
-  width: 60px;
-  height: 35px;
-  line-height: 35px;
-  cursor: pointer;
-  user-select: none;
-  text-align: center;
-  vertical-align: middle;
-  color: #bcbcbc;
+  position: absolute;
+  top: 5px;
+  right: 5px;
   background-color: #de0a0a;
 }
 html body .hotel_list .hotel_expanded .hotel_description {
   display: block;
   margin: 10px 20px;
   width: 85%;
-  user-select: none;
 }
-html body .pagination {
+html body .hotel_list .hotel_expanded .room_list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  background-color: #c1a72e;
+}
+html body .hotel_list .hotel_expanded .room_list .room_wrapper {
+  display: grid;
+  margin: 5px;
+  padding: 10px;
+  background-color: #dd9745;
+  grid-template-areas: "image info price" "name info button";
+}
+html body .hotel_list .hotel_expanded .room_list .room_image {
+  grid-area: image;
+  margin: 0;
+}
+html body .hotel_list .hotel_expanded .room_list .room_name {
+  grid-area: name;
+  text-align: center;
+  margin: 10px 0;
+}
+html body .hotel_list .hotel_expanded .room_list .room_info {
+  grid-area: info;
+  margin: 0 10px;
+}
+html body .hotel_list .hotel_expanded .room_list .room_price {
+  grid-area: price;
+  margin: 0;
+  text-align: center;
+}
+html body .hotel_list .hotel_expanded .room_list .reserve_button {
+  grid-area: button;
+  background-color: #3d0bb3;
+  margin: 0 0 10px;
+}
+html .pagination {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   text-align: center;
   margin: 30px 0;
 }
-html body .pagination a {
+html .pagination a {
   float: left;
   width: 60px;
   margin: 0 8px;

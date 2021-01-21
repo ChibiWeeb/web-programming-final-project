@@ -22,94 +22,104 @@ function databaseInit() {
         let hotelObjectStore = transaction.objectStore(hotelObjectStoreName)
 
         let hotelObject01 = new Hotel(
-            "id01",
+            "hotel01",
             "name01",
             countryList.georgia.name,
             countryList.georgia.cities.tbilisi,
             [tagList.pool, tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.free_parking, tagList.underground_parking, tagList.vending_machines],
             "https://i.picsum.photos/id/645/300/200.jpg?hmac=zSwhK0ipngA3Q8gPxiRsL3NGUmKtCy89EcH8zONvh8M",
-            "descriptions/name01.txt"
+            "descriptions/name01.txt",
+            "rooms/rooms01.json"
         )
         let hotelObject02 = new Hotel(
-            "id02",
+            "hotel02",
             "name02",
             countryList.georgia.name,
             countryList.georgia.cities.batumi,
             [tagList.pool, tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.free_parking],
             "https://i.picsum.photos/id/641/300/200.jpg?hmac=YpOnhDuvo6GeXZPS8yR6Wf62YHrXGlWTDObszZf3zpI",
-            "descriptions/name02.txt"
+            "descriptions/name02.txt",
+            "rooms/rooms01.json"
         )
         let hotelObject03 = new Hotel(
-            "id03",
+            "hotel03",
             "name03",
             countryList.georgia.name,
             countryList.georgia.cities.mestia,
             [tagList.free_wifi, tagList.underground_parking, tagList.vending_machines],
             "https://i.picsum.photos/id/78/300/200.jpg?hmac=n7Sj8aECCS5WoJkWO-zflsPVDeezs5U4M7WgQjLACA0",
-            "descriptions/name03.txt"
+            "descriptions/name03.txt",
+            "rooms/rooms01.json"
         )
         let hotelObject04 = new Hotel(
-            "id04",
+            "hotel04",
             "name04",
             countryList.usa.name,
             countryList.usa.cities.new_york,
             [],
             "https://i.picsum.photos/id/331/300/200.jpg?hmac=uIUrcfY5rEjbMirOCMEvEXzC0tIJzFIBfZBZ4qhvnd4",
-            "descriptions/name04.txt"
+            "descriptions/name04.txt",
+            "rooms/rooms01.json"
         )
         let hotelObject05 = new Hotel(
-            "id05",
+            "hotel05",
             "name05",
             countryList.usa.name,
             countryList.usa.cities.los_angeles,
             [tagList.pool, tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.underground_parking],
             "https://i.picsum.photos/id/816/300/200.jpg?hmac=LyDUxx5Jqqh7V5H3YZdOFIsgVEmG9IWw4H8Iwjfs46I",
-            "descriptions/name05.txt"
+            "descriptions/name05.txt",
+            "rooms/rooms01.json"
         )
         let hotelObject06 = new Hotel(
-            "id06",
+            "hotel06",
             "name06",
             countryList.uk.name,
             countryList.uk.cities.edinburgh,
             [tagList.bar, tagList.free_wifi, tagList.free_parking, tagList.underground_parking, tagList.vending_machines],
             "https://i.picsum.photos/id/721/300/200.jpg?hmac=a8J-TueLrN5E8F50mFD-1efhdFssR3Mj-FuuUHRpddY",
-            "descriptions/name06.txt"
+            "descriptions/name06.txt",
+            "rooms/rooms01.json"
         )
         let hotelObject07 = new Hotel(
-            "id07",
+            "hotel07",
             "name07",
             countryList.france.name,
             countryList.france.cities.paris,
             [tagList.pool, tagList.gym, tagList.bar, tagList.free_parking],
             "https://i.picsum.photos/id/998/300/200.jpg?hmac=ABcJlM1FNcyP3AfTFRqfa64HxavGYS_EloO3wVKI6WY",
-            "descriptions/name07.txt"
+            "descriptions/name07.txt",
+            "rooms/rooms01.json"
         )
         let hotelObject08 = new Hotel(
-            "id08",
+            "hotel08",
             "name08",
             countryList.japan.name,
             countryList.japan.cities.kyoto,
             [tagList.pool, tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.free_parking, tagList.underground_parking, tagList.vending_machines],
             "https://i.picsum.photos/id/173/300/200.jpg?hmac=QNv1dkRQYgkul__n_maFKcC5QLE7zBly8z3gwr3SmI0",
-            "descriptions/name08.txt"
+            "descriptions/name08.txt",
+            "rooms/rooms01.json"
         )
         let hotelObject09 = new Hotel(
-            "id09",
+            "hotel09",
             "name09",
             countryList.japan.name,
             countryList.japan.cities.nara,
             [tagList.bar, tagList.free_wifi, tagList.free_parking, tagList.vending_machines],
             "https://i.picsum.photos/id/203/300/200.jpg?hmac=FsCLTwngZ8-1jbxqdBKyoJy-ZHjbhlupNzeKiib04MI",
-            "descriptions/name09.txt"
+            "descriptions/name09.txt",
+            "rooms/rooms01.json"
         )
         let hotelObject10 = new Hotel(
-            "id10",
+            "hotel10",
             "name10",
             countryList.georgia.name,
             countryList.georgia.cities.mestia,
             [tagList.free_parking],
             "https://i.picsum.photos/id/718/300/200.jpg?hmac=2AXNXV_A7Vmp-rOv8sWOWmRkGUZUJmc8pP3Gvsmu-PE",
-            "descriptions/name10.txt"
+            "descriptions/name10.txt",
+            "rooms/rooms01.json"
         )
 
         let addRequest = hotelObjectStore.add(hotelObject01)
@@ -125,14 +135,14 @@ function databaseInit() {
 
         for (let i = 11; i < 61; i++) {
             let hotelObject = new Hotel(
-                "id" + i,
+                "hotel" + i,
                 "Extra Hotel " + i,
                 countryList.japan.name,
                 countryList.japan.cities.sapporo,
                 [tagList.free_wifi, tagList.free_parking],
-                "https://i.picsum.photos/id/718/300/200.jpg?hmac=2AXNXV_A7Vmp-rOv8sWOWmRkGUZUJmc8pP3Gvsmu-PE"
-                ,
-                "descriptions/name" + i + ".txt"
+                "https://i.picsum.photos/id/718/300/200.jpg?hmac=2AXNXV_A7Vmp-rOv8sWOWmRkGUZUJmc8pP3Gvsmu-PE",
+                "descriptions/name" + i + ".txt",
+                "rooms/rooms01.json"
             )
             addRequest = hotelObjectStore.add(hotelObject)
         }
@@ -308,57 +318,49 @@ function getHotels(countryName, cityName, tags) {
     })
 }
 
-function makeHotelDiv(hotelObj) {
+function makeHotelDiv(hotelObject) {
     const hotelWrapper = document.createElement("div")
     hotelWrapper.setAttribute("class", "hotel")
-    hotelWrapper.setAttribute("id", "hotel_" + hotelObj.id)
-    hotelWrapper.style.display = "flex"
-    hotelWrapper.style.flexDirection = "column"
-    hotelWrapper.style.alignItems = "center"
-    hotelWrapper.style.backgroundColor = "orange"
+    hotelWrapper.setAttribute("id", hotelObject.id)
 
-    hotelWrapper.appendChild(makeHotelNameElement(hotelObj.name))
-    hotelWrapper.appendChild(makeCountryAndCityElement(hotelObj.country, hotelObj.city))
-    hotelWrapper.appendChild(makeImageElement(hotelObj.imageURL))
-    if (hotelObj.tags.length > 0) {
-        hotelWrapper.appendChild(makeHotelTagsElement(hotelObj.tags))
+    hotelWrapper.appendChild(makeHotelNameElement(hotelObject.name))
+    hotelWrapper.appendChild(makeCountryAndCityElement(hotelObject.country, hotelObject.city))
+    hotelWrapper.appendChild(makeImageElement(hotelObject.imageURL, "hotel_image"))
+    if (hotelObject.tags.length > 0) {
+        hotelWrapper.appendChild(makeHotelTagsElement(hotelObject.tags))
     }
-    hotelWrapper.appendChild(makeHotelDescriptionElement(hotelObj.descriptionFileURL))
-    // hotelWrapper.appendChild(makeRoomListElement(hotelObj.rooms))
+    hotelWrapper.appendChild(makeDescriptionElement(hotelObject.descriptionFileURL, "hotel_description"))
+    makeRoomListElement(hotelObject.id, hotelObject.roomsFileURL).then(function (roomListElement) {
+        hotelWrapper.appendChild(roomListElement)
+    })
 
     hotelListArea.appendChild(hotelWrapper)
 }
 
 function makeHotelNameElement(hotelName) {
     const hotelNameElement = document.createElement("h1")
-    hotelNameElement.style.userSelect = "none"
+    hotelNameElement.setAttribute("class", "hotel_name")
     hotelNameElement.appendChild(document.createTextNode(hotelName))
     return hotelNameElement
 }
 
 function makeCountryAndCityElement(hotelCountry, hotelCity) {
     const hotelCountryAndCityElement = document.createElement("h4")
-    hotelCountryAndCityElement.style.textAlign = "center"
-    hotelCountryAndCityElement.style.userSelect = "none"
+    hotelCountryAndCityElement.setAttribute("class", "country_and_city_wrapper")
     hotelCountryAndCityElement.appendChild(document.createTextNode(hotelCountry + ", " + hotelCity))
     return hotelCountryAndCityElement
 }
 
-function makeImageElement(imageURL) {
+function makeImageElement(imageURL, className) {
     const image = document.createElement("img")
+    image.setAttribute("class", className)
     image.setAttribute("src", imageURL)
-    image.style.width = "300px"
-    image.style.height = "200px"
-    image.style.margin = "0 20px 25px"
-    image.style.userSelect = "none"
     return image
 }
 
 function makeHotelTagsElement(hotelTags) {
     const hotelTagsElement = document.createElement("p")
-    hotelTagsElement.style.width = "300px"
-    hotelTagsElement.style.textAlign = "center"
-    hotelTagsElement.style.userSelect = "none"
+    hotelTagsElement.setAttribute("class", "hotel_tags")
 
     let i = 0
     for (; i < hotelTags.length - 1; i++) {
@@ -368,25 +370,62 @@ function makeHotelTagsElement(hotelTags) {
     return hotelTagsElement
 }
 
-function makeHotelDescriptionElement(descriptionFileURL) {
+function makeDescriptionElement(fileURL, className) {
     const descriptionElement = document.createElement("p")
-    descriptionElement.classList.add("hotel_description")
-    fetch(descriptionFileURL)
+    descriptionElement.classList.add(className)
+    fetch(fileURL)
         .then(response => response.text())
         .then(text => descriptionElement.appendChild(document.createTextNode(text.toString())))
     return descriptionElement
 }
 
-function makeRoomListElement(rooms) {
-    const roomList = document.createElement("div")
-    // roomList.style.display = "none"
-    for (let i = 0; i < rooms.length; i++) {
-        const roomWrapper = document.createElement("div")
-        roomWrapper.setAttribute("class", "room")
-        roomWrapper.setAttribute("id", "room" + rooms[i].name)
-        roomWrapper.style.backgroundColor = "#dd9745"
-    }
-    return roomList
+function makeRoomListElement(hotelID, roomsFileURL) {
+    return getRoomsFromJSON(roomsFileURL).then(function (rooms) {
+        const roomListElement = document.createElement("div")
+        roomListElement.setAttribute("class", "room_list")
+        for (let i = 0; i < rooms.length; i++) {
+            const room = rooms[i]
+            const roomWrapper = document.createElement("div")
+            roomWrapper.setAttribute("class", "room_wrapper")
+            roomWrapper.setAttribute("id", hotelID + "_" + room.id)
+
+            roomWrapper.appendChild(makeImageElement(room.imageURL, "room_image"))
+            roomWrapper.appendChild(makeRoomNameElement(room.name))
+            roomWrapper.appendChild(makeDescriptionElement(room.infoFileURL, "room_info"))
+            roomWrapper.appendChild(makeRoomPriceElement(room.price))
+            roomWrapper.appendChild(makeReserveButtonElement())
+
+            roomListElement.appendChild(roomWrapper)
+        }
+        return roomListElement
+    })
+}
+
+function getRoomsFromJSON(roomsFileURL) {
+    return fetch(roomsFileURL)
+        .then(response => response.json())
+        .then(data => data.rooms)
+}
+
+function makeRoomNameElement(roomName) {
+    const roomNameElement = document.createElement("h4")
+    roomNameElement.setAttribute("class", "room_name")
+    roomNameElement.appendChild(document.createTextNode(roomName))
+    return roomNameElement
+}
+
+function makeRoomPriceElement(price) {
+    const roomPriceElement = document.createElement("h3")
+    roomPriceElement.setAttribute("class", "room_price")
+    roomPriceElement.appendChild(document.createTextNode(price))
+    return roomPriceElement
+}
+
+function makeReserveButtonElement() {
+    const reserveButton = document.createElement("div")
+    reserveButton.setAttribute("class", "reserve_button square_button")
+    reserveButton.appendChild(document.createTextNode("Reserve"))
+    return reserveButton
 }
 
 function goToPreviousPage() {
@@ -427,7 +466,7 @@ function expandHotel(hotelElement) {
     filterButton.removeEventListener("click", openFilterMenu)
 
     let closeButton = document.createElement("div")
-    closeButton.classList.add("close_button")
+    closeButton.setAttribute("class", "close_button square_button")
     closeButton.appendChild(document.createTextNode("Close"))
     hotelElement.appendChild(closeButton)
 

@@ -93,7 +93,7 @@ const filterDropdownOptions = [countryList.georgia, countryList.japan, countryLi
 
 
 class Hotel {
-    constructor(id, name, country, city, tags, imageURL, descriptionFileURL) {
+    constructor(id, name, country, city, tags, imageURL, descriptionFileURL, roomsFileURL) {
         this.id = id
         this.name = name
         this.country = country
@@ -101,5 +101,7 @@ class Hotel {
         this.tags = tags
         this.imageURL = imageURL
         this.descriptionFileURL = descriptionFileURL
+        this.roomsFileURL = roomsFileURL
+
     }
 }

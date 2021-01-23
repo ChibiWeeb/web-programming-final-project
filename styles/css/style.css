@@ -1,6 +1,6 @@
 @media only screen and (max-width: 600px) {
   .hotel_name {
-    margin-top: 50px;
+    margin-top: 50px !important;
   }
 
   .room_wrapper {
@@ -24,6 +24,7 @@
 html {
   scroll-behavior: smooth;
   overflow-y: visible;
+  user-select: none;
 }
 html body {
   margin: 50px 0 0 0;
@@ -33,7 +34,6 @@ html body .square_button {
   height: 40px;
   line-height: 40px;
   cursor: pointer;
-  user-select: none;
   text-align: center;
   vertical-align: middle;
   border-radius: 10px;
@@ -44,7 +44,7 @@ html body nav {
   flex-direction: row;
   justify-content: space-between;
   position: fixed;
-  z-index: 980;
+  z-index: 975;
   top: 0;
   width: 100%;
   height: 50px;
@@ -53,7 +53,6 @@ html body nav {
 }
 html body nav img {
   cursor: pointer;
-  user-select: none;
 }
 html body .filter_menu {
   display: flex;
@@ -61,11 +60,11 @@ html body .filter_menu {
   justify-content: space-between;
   position: fixed;
   width: 300px;
-  height: 450px;
-  top: -1000px;
   left: 50%;
   margin-left: -150px;
-  z-index: 985;
+  z-index: 980;
+  height: 450px;
+  top: -1000px;
   background-color: #d2baba;
   transition: all 0.75s ease;
 }
@@ -76,7 +75,6 @@ html body .filter_menu .filter_dropdowns_wrapper .filter_dropdown {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  user-select: none;
 }
 html body .filter_menu .filter_dropdowns_wrapper .filter_dropdown select {
   height: 30px;
@@ -94,7 +92,6 @@ html body .filter_menu .filter_tags_wrapper .filter_tag {
   justify-content: center;
   align-items: center;
   text-align: center;
-  user-select: none;
   cursor: pointer;
   background-color: black;
   color: #8b0000;
@@ -111,6 +108,65 @@ html body .filter_menu .filter_menu_buttons_wrapper #filter_reset_button {
 html body .filter_menu .filter_menu_buttons_wrapper #filter_apply_button {
   background-color: #316d2d;
 }
+html body .reserve_popup {
+  position: fixed;
+  width: 300px;
+  left: 50%;
+  margin-left: -150px;
+  z-index: 990;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  top: 100px;
+  height: 450px;
+  background-color: #4f5e70;
+}
+html body .reserve_popup .name_and_price_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 90%;
+  margin: 20px 0 5px;
+}
+html body .reserve_popup .date_inputs_wrapper {
+  margin-bottom: 5px;
+}
+html body .reserve_popup .credentials_inputs_wrapper {
+  margin: 5px 0 10px;
+}
+html body .reserve_popup .reserve_popup_buttons_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+}
+html body .reserve_popup .reserve_popup_buttons_wrapper #reserve_cancel_button {
+  background-color: #de0a0a;
+}
+html body .reserve_popup .reserve_popup_buttons_wrapper #reserve_reserve_button {
+  background-color: #316d2d;
+}
+html body .reserve_popup .input_wrapper {
+  margin: 15px 0;
+}
+html body .reserve_popup .input_wrapper label {
+  display: block;
+  text-align: left;
+  margin: 5px 0;
+}
+html body .reserve_popup .input_wrapper label h4 {
+  margin: 10px 0;
+}
+html body .reserve_popup_dimmed_overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 985;
+  background-color: rgba(0, 0, 0, 0.85);
+}
 html body aside {
   position: fixed;
   height: 100%;
@@ -122,14 +178,14 @@ html body aside {
   background-color: black;
   color: wheat;
 }
-html body .dimmed_overlay {
+html body .side_menu_dimmed_overlay {
   display: none;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 990;
+  z-index: 995;
   background-color: rgba(0, 0, 0, 0.85);
 }
 html body .hotel_list {
@@ -144,9 +200,6 @@ html body .hotel_list .hotel {
   flex-direction: column;
   align-items: center;
   background-color: orange;
-}
-html body .hotel_list .hotel * {
-  user-select: none;
 }
 html body .hotel_list .hotel .country_and_city_wrapper {
   text-align: center;
@@ -237,7 +290,6 @@ html .pagination a {
   width: 60px;
   margin: 0 8px;
   padding: 8px 16px;
-  user-select: none;
   text-decoration: none;
   cursor: pointer;
   color: white;

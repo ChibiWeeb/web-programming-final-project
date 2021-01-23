@@ -1,32 +1,50 @@
 {
   "rooms": [
     {
-      "id": "room01",
+      "roomID": "room01",
       "name": "Standard Single Room",
       "imageURL": "https://i.picsum.photos/id/420/225/150.jpg?hmac=2qrNMYBCGbNfU4g_ZoQ0HfNFyc1cjZLjMr0pekwH3NQ",
       "infoFileURL": "descriptions/name01.txt",
-      "price": "$100"
+      "price": "$100",
+      "reservedDates": [
+        "2021-02-01:2021-02-01",
+        "2021-02-09:2021-02-10",
+        "2021-02-11:2021-02-15",
+        "2021-02-17:2021-02-28"
+      ]
     },
     {
-      "id": "room02",
+      "roomID": "room02",
       "name": "Standard Double Room",
       "imageURL": "https://i.picsum.photos/id/883/225/150.jpg?hmac=2cNaasZVCBn7UVctivRAtHjXyD9JvdZxx131bXPxT6M",
       "infoFileURL": "descriptions/name02.txt",
-      "price": "$200"
+      "price": "$200",
+      "reservedDates": [
+        "2021-02-10:2021-02-20",
+        "2021-02-24:2021-03-10"
+      ]
     },
     {
-      "id": "room03",
+      "roomID": "room03",
       "name": "Standard Twin Room",
       "imageURL": "https://i.picsum.photos/id/1011/225/150.jpg?hmac=Kj18zq0ariZE18SAfWGJUQxtibbq9T8lzUgws62_cD4",
       "infoFileURL": "descriptions/name03.txt",
-      "price": "$300"
+      "price": "$300",
+      "reservedDates": [
+        "2021-02-10:2021-02-20",
+        "2021-02-21:2021-03-21",
+        "2021-03-22:2021-03-09"
+      ]
     },
     {
-      "id": "room04",
+      "roomID": "room04",
       "name": "Deluxe Twin Room",
       "imageURL": "https://i.picsum.photos/id/169/225/150.jpg?hmac=7n7aHVpBt4rZdBu35ihCgx0w2PSpAz2ow-8_RkRAR5k",
       "infoFileURL": "descriptions/name04.txt",
-      "price": "$400"
+      "price": "$400",
+      "reservedDates": [
+
+      ]
     }
   ]
 }

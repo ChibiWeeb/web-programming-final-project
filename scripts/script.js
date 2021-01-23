@@ -12,7 +12,7 @@ function databaseInit() {
     openRequest.onupgradeneeded = function () {
         let database = openRequest.result
         if (!database.objectStoreNames.contains(hotelObjectStoreName)) {
-            database.createObjectStore(hotelObjectStoreName, {keyPath: "id"})
+            database.createObjectStore(hotelObjectStoreName, {keyPath: "hotelID"})
         }
     }
 
@@ -163,9 +163,8 @@ function initialize() {
     profileButton.addEventListener("click", function () {
         openSidebar(250)
     })
-    dimmedOverlay.addEventListener("click", function () {
-        closeSidebar()
-    })
+    reservePopupCancelButton.addEventListener("click", closeReservePopup)
+    sideMenuDimmedOverlay.addEventListener("click", closeSidebar)
 
     for (let i = 0; i < filterTags.length; i++) {
         filterTags[i].addEventListener("click", function () {
@@ -200,13 +199,13 @@ function scrollToTop() {
 function openSidebar(width) {
     sidebar.style.width = width.toString() + "px"
     html.style.overflow = "hidden"
-    dimmedOverlay.style.display = "block"
+    sideMenuDimmedOverlay.style.display = "block"
 }
 
 function closeSidebar() {
     sidebar.style.width = "0"
     html.style.overflow = "auto"
-    dimmedOverlay.style.display = "none"
+    sideMenuDimmedOverlay.style.display = "none"
 }
 
 function openFilterMenu() {
@@ -321,7 +320,7 @@ function getHotels(countryName, cityName, tags) {
 function makeHotelDiv(hotelObject) {
     const hotelWrapper = document.createElement("div")
     hotelWrapper.setAttribute("class", "hotel")
-    hotelWrapper.setAttribute("id", hotelObject.id)
+    hotelWrapper.setAttribute("id", hotelObject.hotelID)
 
     hotelWrapper.appendChild(makeHotelNameElement(hotelObject.name))
     hotelWrapper.appendChild(makeCountryAndCityElement(hotelObject.country, hotelObject.city))
@@ -330,7 +329,7 @@ function makeHotelDiv(hotelObject) {
         hotelWrapper.appendChild(makeHotelTagsElement(hotelObject.tags))
     }
     hotelWrapper.appendChild(makeDescriptionElement(hotelObject.descriptionFileURL, "hotel_description"))
-    makeRoomListElement(hotelObject.id, hotelObject.roomsFileURL).then(function (roomListElement) {
+    makeRoomListElement(hotelObject.hotelID, hotelObject.roomsFileURL).then(function (roomListElement) {
         hotelWrapper.appendChild(roomListElement)
     })
 
@@ -385,15 +384,16 @@ function makeRoomListElement(hotelID, roomsFileURL) {
         roomListElement.setAttribute("class", "room_list")
         for (let i = 0; i < rooms.length; i++) {
             const room = rooms[i]
+            const roomID = hotelID + "_" + room.roomID
             const roomWrapper = document.createElement("div")
             roomWrapper.setAttribute("class", "room_wrapper")
-            roomWrapper.setAttribute("id", hotelID + "_" + room.id)
+            roomWrapper.setAttribute("id", roomID)
 
             roomWrapper.appendChild(makeImageElement(room.imageURL, "room_image"))
             roomWrapper.appendChild(makeRoomNameElement(room.name))
             roomWrapper.appendChild(makeDescriptionElement(room.infoFileURL, "room_info"))
             roomWrapper.appendChild(makeRoomPriceElement(room.price))
-            roomWrapper.appendChild(makeReserveButtonElement())
+            roomWrapper.appendChild(makeReserveButtonElement(roomID))
 
             roomListElement.appendChild(roomWrapper)
         }
@@ -421,11 +421,64 @@ function makeRoomPriceElement(price) {
     return roomPriceElement
 }
 
-function makeReserveButtonElement() {
+function makeReserveButtonElement(roomID) {
     const reserveButton = document.createElement("div")
     reserveButton.setAttribute("class", "reserve_button square_button")
+    reserveButton.setAttribute("id", "button_" + roomID)
     reserveButton.appendChild(document.createTextNode("Reserve"))
+    reserveButton.addEventListener("click", function (e) {
+        showReservePopup(e)
+    })
     return reserveButton
+}
+
+function showReservePopup(mouseEvent) {
+    if (mouseEvent.target && mouseEvent.target.parentNode && mouseEvent.target.parentNode.className === "room_wrapper") {
+        html.style.overflow = "hidden"
+        reservePopupDimmedOverlay.style.display = "block"
+        reservePopup.style.display = "flex"
+
+        const roomObject = document.querySelector("#" + mouseEvent.target.parentNode.id)
+        const nameAndPriceWrapperElement = document.createElement("div")
+        nameAndPriceWrapperElement.setAttribute("class", "name_and_price_wrapper")
+
+        const nameWrapper = document.createElement("div")
+        nameWrapper.appendChild(document.createTextNode(roomObject.querySelector(".room_name").textContent))
+        const priceWrapper = document.createElement("div")
+        priceWrapper.appendChild(document.createTextNode(roomObject.querySelector(".room_price").textContent))
+
+        nameAndPriceWrapperElement.appendChild(nameWrapper)
+        nameAndPriceWrapperElement.appendChild(priceWrapper)
+
+        // reservePopup.insertBefore(nameAndPriceWrapperElement, reservePopup.firstChild)
+    }
+}
+
+function makeDatepicker(inputElement) {
+    const datepickerFrom = new Datepicker(inputElement)
+    const dateNow = new Date()
+    datepickerFrom.config({
+        first_date: dateNow,
+        last_date: new Date(dateNow.getFullYear(), dateNow.getMonth() + 3, dateNow.getDate()),
+        initial_date: dateNow,
+        // enabled_days: d => {
+        //     return (d.getDay() > 0 && d.getDay() < 6)
+        // },
+        format: d => {
+            return [
+                WEEKDAYS_SHORT[d.getDay()],
+                d.getDate(),
+                MONTHS_SHORT[d.getMonth()],
+                d.getFullYear(),
+            ].join(" ")
+        }
+    })
+}
+
+function closeReservePopup() {
+    html.style.overflow = "auto"
+    reservePopupDimmedOverlay.style.display = "none"
+    reservePopup.style.display = "none"
 }
 
 function goToPreviousPage() {

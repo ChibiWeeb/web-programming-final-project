@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="scripts/js-datepicker-master/datepicker.css">
     <link rel="stylesheet" href="styles/css/style.css">
     <title>Title</title>
 </head>
@@ -67,6 +68,52 @@
         </div>
     </div>
 </div>
+<div class="reserve_popup">
+    <div class="date_inputs_wrapper">
+        <div class="input_wrapper">
+            <label for="date_from_input">
+                Start Date
+            </label>
+            <input id="date_from_input" type="text" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="input_wrapper">
+            <label for="date_to_input">
+                End Date
+            </label>
+            <input id="date_to_input" type="text" autocomplete="off" spellcheck="false">
+        </div>
+    </div>
+    <div class="credentials_inputs_wrapper">
+        <div class="input_wrapper">
+            <label for="first_name_input">
+                First Name
+            </label>
+            <input id="first_name_input" type="text" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="input_wrapper">
+            <label for="last_name_input">
+                Last Name
+            </label>
+            <input id="last_name_input" type="text" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="input_wrapper">
+            <label for="phone_number_input">
+                Phone Number
+            </label>
+            <input id="phone_number_input" type="tel" autocomplete="off" spellcheck="false">
+        </div>
+    </div>
+    <div class="reserve_popup_buttons_wrapper">
+        <div class="square_button" id="reserve_cancel_button">
+            Cancel
+        </div>
+        <div class="square_button" id="reserve_reserve_button">
+            Reserve
+        </div>
+    </div>
+</div>
+<div class="reserve_popup_dimmed_overlay">
+</div>
 <aside>
     <h1>
         thing1
@@ -78,7 +125,7 @@
         thing3
     </h1>
 </aside>
-<div class="dimmed_overlay">
+<div class="side_menu_dimmed_overlay">
 </div>
 <div class="hotel_list">
 </div>
@@ -86,6 +133,7 @@
     <a class="previous_page">Previous</a>
     <a class="next_page">Next</a>
 </div>
+<script type="text/javascript" src="scripts/js-datepicker-master/datepicker.js"></script>
 <script type="text/javascript" src="scripts/auxiliary.js"></script>
 <script type="text/javascript" src="scripts/script.js"></script>
 </body>

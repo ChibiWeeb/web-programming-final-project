@@ -1,10 +1,37 @@
 $navbar-height: 50px;
 $filter-menu-width: 300px;
-$filter-menu-height: 450px;
+$reserve-popup-width: 300px;
+
+$side-menu-z-index: 1000;
+$side-menu-dimmed-overlay-z-index: 995;
+$reserve-popup-z-index: 990;
+$reserve_popup_dimmed_overlay-z-index: 985;
+$filter-menu-z-index: 980;
+$navbar-z-index: 975;
+
+
+@mixin centered-popup($width, $z-index) {
+  position: fixed;
+  width: $width;
+  left: 50%;
+  margin-left: -$width / 2;
+  z-index: $z-index;
+}
+
+@mixin dimmed-overlay($z-index) {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $z-index;
+  background-color: rgba(0, 0, 0, 0.85);
+}
 
 @media only screen and (max-width: 600px) {
   .hotel_name {
-    margin-top: 50px;
+    margin-top: 50px !important;
   }
 
   .room_wrapper {
@@ -12,8 +39,7 @@ $filter-menu-height: 450px;
             "image image"
             "name name"
             "info info"
-            "price button"
-    !important;
+            "price button" !important;
 
     .room_image {
       justify-self: center !important;
@@ -39,6 +65,7 @@ $filter-menu-height: 450px;
 html {
   scroll-behavior: smooth;
   overflow-y: visible;
+  user-select: none;
 
   body {
     margin: $navbar-height 0 0 0;
@@ -48,7 +75,6 @@ html {
       height: 40px;
       line-height: 40px;
       cursor: pointer;
-      user-select: none;
       text-align: center;
       vertical-align: middle;
       border-radius: 10px;
@@ -61,7 +87,7 @@ html {
       justify-content: space-between;
 
       position: fixed;
-      z-index: 980;
+      z-index: $navbar-z-index;
       top: 0;
       width: 100%;
       height: $navbar-height;
@@ -71,7 +97,6 @@ html {
 
       img {
         cursor: pointer;
-        user-select: none;
       }
     }
 
@@ -80,13 +105,9 @@ html {
       flex-direction: column;
       justify-content: space-between;
 
-      position: fixed;
-      width: $filter-menu-width;
-      height: $filter-menu-height;
+      @include centered-popup($filter-menu-width, $filter-menu-z-index);
+      height: 450px;
       top: -1000px;
-      left: 50%;
-      margin-left: -$filter-menu-width / 2;
-      z-index: 985;
       background-color: #d2baba;
 
       transition: all 0.75s ease;
@@ -98,7 +119,6 @@ html {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          user-select: none;
 
           select {
             height: 30px;
@@ -119,7 +139,6 @@ html {
           justify-content: center;
           align-items: center;
           text-align: center;
-          user-select: none;
           cursor: pointer;
           background-color: black;
           color: #8b0000;
@@ -143,11 +162,70 @@ html {
       }
     }
 
+    .reserve_popup {
+      @include centered-popup($reserve-popup-width, $reserve-popup-z-index);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      top: 100px;
+      height: 450px;
+      background-color: #4f5e70;
+
+      .name_and_price_wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 90%;
+        margin: 20px 0 5px;
+      }
+
+      .date_inputs_wrapper {
+        margin-bottom: 5px;
+      }
+
+      .credentials_inputs_wrapper {
+        margin: 5px 0 10px;
+      }
+
+      .reserve_popup_buttons_wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 80%;
+
+        #reserve_cancel_button {
+          background-color: #de0a0a;
+        }
+
+        #reserve_reserve_button {
+          background-color: #316d2d;
+        }
+      }
+
+      .input_wrapper {
+        margin: 15px 0;
+
+        label {
+          display: block;
+          text-align: left;
+          margin: 5px 0;
+
+          h4 {
+            margin: 10px 0;
+          }
+        }
+      }
+    }
+
+    .reserve_popup_dimmed_overlay {
+      @include dimmed-overlay($reserve_popup_dimmed_overlay-z-index)
+    }
+
     aside {
       position: fixed;
       height: 100%;
       width: 0;
-      z-index: 1000;
+      z-index: $side-menu-z-index;
       top: 0;
       right: 0;
       transition: 0.5s;
@@ -155,15 +233,8 @@ html {
       color: wheat;
     }
 
-    .dimmed_overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 990;
-      background-color: rgba(0, 0, 0, 0.85);
+    .side_menu_dimmed_overlay {
+      @include dimmed-overlay($side-menu-dimmed-overlay-z-index)
     }
 
     .hotel_list {
@@ -178,10 +249,6 @@ html {
         flex-direction: column;
         align-items: center;
         background-color: orange;
-
-        * {
-          user-select: none;
-        }
 
         .country_and_city_wrapper {
           text-align: center;
@@ -293,7 +360,6 @@ html {
       width: 60px;
       margin: 0 8px;
       padding: 8px 16px;
-      user-select: none;
       text-decoration: none;
       cursor: pointer;
       color: white;

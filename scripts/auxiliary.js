@@ -8,15 +8,19 @@ const logo = document.querySelector(".logo")
 const filterButton = document.querySelector(".filter_button")
 const profileButton = document.querySelector(".profile_button")
 
-const sidebar = document.querySelector("aside")
-const dimmedOverlay = document.querySelector(".dimmed_overlay")
-
 const filterMenu = document.querySelector(".filter_menu")
 const filterCountriesDropdownSelect = document.querySelector("#countries")
 const filterCitiesDropdownSelect = document.querySelector("#cities")
 const filterTags = document.querySelectorAll(".filter_tag")
 const filterResetButton = document.querySelector("#filter_reset_button")
 const filterApplyButton = document.querySelector("#filter_apply_button")
+
+const reservePopupDimmedOverlay = document.querySelector(".reserve_popup_dimmed_overlay")
+const reservePopup = document.querySelector(".reserve_popup")
+const reservePopupCancelButton = document.querySelector("#reserve_cancel_button")
+
+const sidebar = document.querySelector("aside")
+const sideMenuDimmedOverlay = document.querySelector(".side_menu_dimmed_overlay")
 
 const hotelListArea = document.querySelector(".hotel_list")
 
@@ -93,8 +97,8 @@ const filterDropdownOptions = [countryList.georgia, countryList.japan, countryLi
 
 
 class Hotel {
-    constructor(id, name, country, city, tags, imageURL, descriptionFileURL, roomsFileURL) {
-        this.id = id
+    constructor(hotelID, name, country, city, tags, imageURL, descriptionFileURL, roomsFileURL) {
+        this.hotelID = hotelID
         this.name = name
         this.country = country
         this.city = city

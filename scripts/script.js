@@ -450,7 +450,7 @@ function showReservePopup(mouseEvent) {
         nameAndPriceWrapperElement.appendChild(nameWrapper)
         nameAndPriceWrapperElement.appendChild(priceWrapper)
 
-        // reservePopup.insertBefore(nameAndPriceWrapperElement, reservePopup.firstChild)
+        reservePopup.insertBefore(nameAndPriceWrapperElement, reservePopup.firstChild)
     }
 }
 
@@ -479,6 +479,7 @@ function closeReservePopup() {
     html.style.overflow = "auto"
     reservePopupDimmedOverlay.style.display = "none"
     reservePopup.style.display = "none"
+    reservePopup.removeChild(reservePopup.firstChild)
 }
 
 function goToPreviousPage() {

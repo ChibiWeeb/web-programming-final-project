@@ -18,6 +18,7 @@ const filterApplyButton = document.querySelector("#filter_apply_button")
 const reservePopupDimmedOverlay = document.querySelector(".reserve_popup_dimmed_overlay")
 const reservePopup = document.querySelector(".reserve_popup")
 const reservePopupCancelButton = document.querySelector("#reserve_cancel_button")
+const reservePopupReserveButton = document.querySelector("#reserve_reserve_button")
 
 const sidebar = document.querySelector("aside")
 const sideMenuDimmedOverlay = document.querySelector(".side_menu_dimmed_overlay")
@@ -94,9 +95,18 @@ const countryList = {
     }
 }
 const filterDropdownOptions = [countryList.georgia, countryList.japan, countryList.usa, countryList.uk, countryList.france]
-
+const reservedDatesMap = new Map()
 
 class Hotel {
+    hotelID
+    name
+    country
+    city
+    tags
+    imageURL
+    descriptionFileURL
+    roomsFileURL
+
     constructor(hotelID, name, country, city, tags, imageURL, descriptionFileURL, roomsFileURL) {
         this.hotelID = hotelID
         this.name = name
@@ -106,6 +116,5 @@ class Hotel {
         this.imageURL = imageURL
         this.descriptionFileURL = descriptionFileURL
         this.roomsFileURL = roomsFileURL
-
     }
 }

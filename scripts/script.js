@@ -394,6 +394,7 @@ function makeRoomListElement(hotelID, roomsFileURL) {
             roomWrapper.appendChild(makeDescriptionElement(room.infoFileURL, "room_info"))
             roomWrapper.appendChild(makeRoomPriceElement(room.price))
             roomWrapper.appendChild(makeReserveButtonElement(roomID))
+            reservedDatesMap.set(roomID, room.reservedDates)
 
             roomListElement.appendChild(roomWrapper)
         }
@@ -439,6 +440,9 @@ function showReservePopup(mouseEvent) {
         reservePopup.style.display = "flex"
 
         const roomObject = document.querySelector("#" + mouseEvent.target.parentNode.id)
+        reservePopupReserveButton.addEventListener("click", function () {
+            reserveTheRoom(roomObject.id)
+        })
         const nameAndPriceWrapperElement = document.createElement("div")
         nameAndPriceWrapperElement.setAttribute("class", "name_and_price_wrapper")
 
@@ -451,22 +455,31 @@ function showReservePopup(mouseEvent) {
         nameAndPriceWrapperElement.appendChild(priceWrapper)
 
         reservePopup.insertBefore(nameAndPriceWrapperElement, reservePopup.firstChild)
+
+        makeDatepickers(roomObject.id)
     }
 }
 
-function makeDatepicker(inputElement) {
-    const datepickerFrom = new Datepicker(inputElement)
+function makeDatepickers(roomObjectID) {
+    const dateFromInputElement = document.querySelector("#date_from_input")
+    const datepickerFrom = new Datepicker(dateFromInputElement)
+    const dateToInputElement = document.querySelector("#date_to_input")
+    const datepickerTo = new Datepicker(dateToInputElement)
+
+    configureDatepicker(datepickerFrom, roomObjectID)
+    configureDatepicker(datepickerTo, roomObjectID)
+}
+
+function configureDatepicker(datepicker, roomObjectID) {
     const dateNow = new Date()
-    datepickerFrom.config({
+    const roomReservedDates = reservedDatesMap.get(roomObjectID)
+    datepicker.config({
         first_date: dateNow,
         last_date: new Date(dateNow.getFullYear(), dateNow.getMonth() + 3, dateNow.getDate()),
         initial_date: dateNow,
-        // enabled_days: d => {
-        //     return (d.getDay() > 0 && d.getDay() < 6)
-        // },
+        enabled_days: d => dateIsNotReserved(d, roomReservedDates),
         format: d => {
             return [
-                WEEKDAYS_SHORT[d.getDay()],
                 d.getDate(),
                 MONTHS_SHORT[d.getMonth()],
                 d.getFullYear(),
@@ -475,11 +488,46 @@ function makeDatepicker(inputElement) {
     })
 }
 
+function dateIsNotReserved(date, roomReservedDates) {
+    for (let i = 0; i < roomReservedDates.length; i++) {
+        const datePeriod = roomReservedDates[i].split(":")
+        const dateStart = new Date(datePeriod[0])
+        dateStart.setDate(dateStart.getDate() - 1)
+        const dateEnd = new Date(datePeriod[1])
+        if ((date.getTime() >= dateStart.getTime()) && (date.getTime() <= dateEnd.getTime())) {
+            return false
+        }
+    }
+    return true
+}
+
 function closeReservePopup() {
     html.style.overflow = "auto"
     reservePopupDimmedOverlay.style.display = "none"
     reservePopup.style.display = "none"
     reservePopup.removeChild(reservePopup.firstChild)
+}
+
+function reserveTheRoom(roomObjectID) {
+    const dateFromInput = document.querySelector("#date_from_input")
+    const dateFrom = new Date(dateFromInput.value.toString())
+    const dateToInput = document.querySelector("#date_to_input")
+    const dateTo = new Date(dateToInput.value.toString())
+
+    if (overlapsWithReservedDates(dateFrom, dateTo, roomObjectID)) {
+        alert("Chosen date overlaps with unavailable dates")
+    } else {
+        
+    }
+}
+
+function overlapsWithReservedDates(dateFrom, dateTo, roomObjectID) {
+    for (let currDate = dateFrom; currDate.getTime() <= dateTo.getTime(); currDate.setDate(currDate.getDate() + 1)) {
+        if (!dateIsNotReserved(currDate, reservedDatesMap.get(roomObjectID))) {
+            return true
+        }
+    }
+    return false
 }
 
 function goToPreviousPage() {

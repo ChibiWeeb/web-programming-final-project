@@ -257,6 +257,8 @@ html body .hotel_list .hotel_expanded .room_list .room_wrapper {
 }
 html body .hotel_list .hotel_expanded .room_list .room_image {
   grid-area: image;
+  width: 225px;
+  height: 150px;
   margin: 0;
 }
 html body .hotel_list .hotel_expanded .room_list .room_name {

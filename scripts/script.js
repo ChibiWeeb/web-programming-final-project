@@ -29,7 +29,7 @@ function databaseInit() {
             [tagList.pool, tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.free_parking, tagList.underground_parking, tagList.vending_machines],
             "https://i.picsum.photos/id/645/300/200.jpg?hmac=zSwhK0ipngA3Q8gPxiRsL3NGUmKtCy89EcH8zONvh8M",
             "descriptions/name01.txt",
-            "rooms/rooms01.json"
+            "rooms/hotel01.json"
         )
         let hotelObject02 = new Hotel(
             "hotel02",
@@ -39,7 +39,7 @@ function databaseInit() {
             [tagList.pool, tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.free_parking],
             "https://i.picsum.photos/id/641/300/200.jpg?hmac=YpOnhDuvo6GeXZPS8yR6Wf62YHrXGlWTDObszZf3zpI",
             "descriptions/name02.txt",
-            "rooms/rooms01.json"
+            "rooms/hotel01.json"
         )
         let hotelObject03 = new Hotel(
             "hotel03",
@@ -49,7 +49,7 @@ function databaseInit() {
             [tagList.free_wifi, tagList.underground_parking, tagList.vending_machines],
             "https://i.picsum.photos/id/78/300/200.jpg?hmac=n7Sj8aECCS5WoJkWO-zflsPVDeezs5U4M7WgQjLACA0",
             "descriptions/name03.txt",
-            "rooms/rooms01.json"
+            "rooms/hotel01.json"
         )
         let hotelObject04 = new Hotel(
             "hotel04",
@@ -59,7 +59,7 @@ function databaseInit() {
             [],
             "https://i.picsum.photos/id/331/300/200.jpg?hmac=uIUrcfY5rEjbMirOCMEvEXzC0tIJzFIBfZBZ4qhvnd4",
             "descriptions/name04.txt",
-            "rooms/rooms01.json"
+            "rooms/hotel01.json"
         )
         let hotelObject05 = new Hotel(
             "hotel05",
@@ -69,7 +69,7 @@ function databaseInit() {
             [tagList.pool, tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.underground_parking],
             "https://i.picsum.photos/id/816/300/200.jpg?hmac=LyDUxx5Jqqh7V5H3YZdOFIsgVEmG9IWw4H8Iwjfs46I",
             "descriptions/name05.txt",
-            "rooms/rooms01.json"
+            "rooms/hotel01.json"
         )
         let hotelObject06 = new Hotel(
             "hotel06",
@@ -79,7 +79,7 @@ function databaseInit() {
             [tagList.bar, tagList.free_wifi, tagList.free_parking, tagList.underground_parking, tagList.vending_machines],
             "https://i.picsum.photos/id/721/300/200.jpg?hmac=a8J-TueLrN5E8F50mFD-1efhdFssR3Mj-FuuUHRpddY",
             "descriptions/name06.txt",
-            "rooms/rooms01.json"
+            "rooms/hotel01.json"
         )
         let hotelObject07 = new Hotel(
             "hotel07",
@@ -89,7 +89,7 @@ function databaseInit() {
             [tagList.pool, tagList.gym, tagList.bar, tagList.free_parking],
             "https://i.picsum.photos/id/998/300/200.jpg?hmac=ABcJlM1FNcyP3AfTFRqfa64HxavGYS_EloO3wVKI6WY",
             "descriptions/name07.txt",
-            "rooms/rooms01.json"
+            "rooms/hotel01.json"
         )
         let hotelObject08 = new Hotel(
             "hotel08",
@@ -99,7 +99,7 @@ function databaseInit() {
             [tagList.pool, tagList.gym, tagList.bar, tagList.free_wifi, tagList.buffet, tagList.free_parking, tagList.underground_parking, tagList.vending_machines],
             "https://i.picsum.photos/id/173/300/200.jpg?hmac=QNv1dkRQYgkul__n_maFKcC5QLE7zBly8z3gwr3SmI0",
             "descriptions/name08.txt",
-            "rooms/rooms01.json"
+            "rooms/hotel01.json"
         )
         let hotelObject09 = new Hotel(
             "hotel09",
@@ -109,7 +109,7 @@ function databaseInit() {
             [tagList.bar, tagList.free_wifi, tagList.free_parking, tagList.vending_machines],
             "https://i.picsum.photos/id/203/300/200.jpg?hmac=FsCLTwngZ8-1jbxqdBKyoJy-ZHjbhlupNzeKiib04MI",
             "descriptions/name09.txt",
-            "rooms/rooms01.json"
+            "rooms/hotel01.json"
         )
         let hotelObject10 = new Hotel(
             "hotel10",
@@ -119,7 +119,7 @@ function databaseInit() {
             [tagList.free_parking],
             "https://i.picsum.photos/id/718/300/200.jpg?hmac=2AXNXV_A7Vmp-rOv8sWOWmRkGUZUJmc8pP3Gvsmu-PE",
             "descriptions/name10.txt",
-            "rooms/rooms01.json"
+            "rooms/hotel01.json"
         )
 
         let addRequest = hotelObjectStore.add(hotelObject01)
@@ -142,7 +142,7 @@ function databaseInit() {
                 [tagList.free_wifi, tagList.free_parking],
                 "https://i.picsum.photos/id/718/300/200.jpg?hmac=2AXNXV_A7Vmp-rOv8sWOWmRkGUZUJmc8pP3Gvsmu-PE",
                 "descriptions/name" + i + ".txt",
-                "rooms/rooms01.json"
+                "rooms/hotel01.json"
             )
             addRequest = hotelObjectStore.add(hotelObject)
         }
@@ -475,15 +475,15 @@ function configureDatepicker(datepicker, roomObjectID) {
     const roomReservedDates = reservedDatesMap.get(roomObjectID)
     datepicker.config({
         first_date: dateNow,
-        last_date: new Date(dateNow.getFullYear(), dateNow.getMonth() + 3, dateNow.getDate()),
+        last_date: new Date(dateNow.getFullYear(), dateNow.getMonth() + 12, dateNow.getDate()),
         initial_date: dateNow,
         enabled_days: d => dateIsNotReserved(d, roomReservedDates),
         format: d => {
             return [
-                d.getDate(),
-                MONTHS_SHORT[d.getMonth()],
                 d.getFullYear(),
-            ].join(" ")
+                formatMonth(d.getMonth() + 1),
+                d.getDate(),
+            ].join("-")
         }
     })
 }
@@ -492,8 +492,9 @@ function dateIsNotReserved(date, roomReservedDates) {
     for (let i = 0; i < roomReservedDates.length; i++) {
         const datePeriod = roomReservedDates[i].split(":")
         const dateStart = new Date(datePeriod[0])
-        dateStart.setDate(dateStart.getDate() - 1)
+        dateStart.setHours(0, 0, 0, 0)
         const dateEnd = new Date(datePeriod[1])
+        dateEnd.setHours(23, 59, 59, 999)
         if ((date.getTime() >= dateStart.getTime()) && (date.getTime() <= dateEnd.getTime())) {
             return false
         }
@@ -506,18 +507,26 @@ function closeReservePopup() {
     reservePopupDimmedOverlay.style.display = "none"
     reservePopup.style.display = "none"
     reservePopup.removeChild(reservePopup.firstChild)
+    document.querySelector(".credentials_inputs_wrapper").querySelectorAll("input")
+        .forEach(function (element) {
+            element.value = ""
+        })
 }
 
 function reserveTheRoom(roomObjectID) {
     const dateFromInput = document.querySelector("#date_from_input")
-    const dateFrom = new Date(dateFromInput.value.toString())
+    const dateFrom = new Date(dateFromInput.value)
     const dateToInput = document.querySelector("#date_to_input")
-    const dateTo = new Date(dateToInput.value.toString())
+    const dateTo = new Date(dateToInput.value)
+    const dateToIsEarlierThanDateFrom = (dateTo.getTime() < dateFrom.getTime())
 
     if (overlapsWithReservedDates(dateFrom, dateTo, roomObjectID)) {
-        alert("Chosen date overlaps with unavailable dates")
+        alert("Chosen date period contains already reserved dates")
+    } else if (dateToIsEarlierThanDateFrom) {
+        alert("End Date cannot be earlier than Start Date")
     } else {
-        
+        const formattedChosenDate = dateFromInput.value + ":" + dateToInput.value
+        // reservedDatesMap.get(roomObjectID).push(formattedChosenDate)
     }
 }
 
@@ -528,6 +537,10 @@ function overlapsWithReservedDates(dateFrom, dateTo, roomObjectID) {
         }
     }
     return false
+}
+
+function formatMonth(month) {
+    return ((month < 10) ? ("0" + month) : month)
 }
 
 function goToPreviousPage() {

@@ -95,7 +95,6 @@ const countryList = {
     }
 }
 const filterDropdownOptions = [countryList.georgia, countryList.japan, countryList.usa, countryList.uk, countryList.france]
-const reservedDatesMap = new Map()
 
 class Hotel {
     hotelID

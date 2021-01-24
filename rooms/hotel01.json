@@ -41,10 +41,7 @@
       "name": "Deluxe Twin Room",
       "imageURL": "https://i.picsum.photos/id/169/225/150.jpg?hmac=7n7aHVpBt4rZdBu35ihCgx0w2PSpAz2ow-8_RkRAR5k",
       "infoFileURL": "descriptions/name04.txt",
-      "price": "$400",
-      "reservedDates": [
-
-      ]
+      "price": "$400"
     }
   ]
 }

@@ -1,15 +1,11 @@
 let activePageNum = 1
 let hotelTotalNumber
 
-// while (true) {
-//     if (localStorage.getItem("databaseInitialized") === "initialized") {
-        console.log("yes")
-        initialize()
-        showHotelList()
-        showDropdownOptions()
-        // break
-    // }
-// }
+//TODO: GET RID OF JSON! PLEASE!!!
+
+initialize()
+showHotelList()
+showDropdownOptions()
 
 function initialize() {
     logo.addEventListener("click", scrollToTop)

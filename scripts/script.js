@@ -53,6 +53,7 @@ function openSideMenu() {
     })
     sideMenu.style.width = "250px"
     html.style.overflow = "hidden"
+    sideMenu.style.overflowY = "auto"
     sideMenuDimmedOverlay.style.display = "block"
 }
 
@@ -63,6 +64,7 @@ function closeSideMenu() {
     })
     sideMenu.style.width = "0"
     html.style.overflow = "auto"
+    sideMenu.style.overflowY = "hidden"
     sideMenuDimmedOverlay.style.display = "none"
 }
 

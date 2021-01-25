@@ -149,7 +149,7 @@ function addInitialHotels(database) {
     addRequest = hotelObjectStore.add(hotelObject10)
 
     for (let i = 11; i < 61; i++) {
-        const hotelObject = new Hotel(
+        const hotelObject = makeHotelObject(
             "hotel" + i,
             "Extra Hotel " + i,
             countryList.japan.name,

@@ -1,11 +1,11 @@
 let activePageNum = 1
 let hotelTotalNumber
 
-//TODO: GET RID OF JSON! PLEASE!!!
 
 initialize()
 showHotelList()
 showDropdownOptions()
+
 
 function initialize() {
     logo.addEventListener("click", scrollToTop)
@@ -186,7 +186,6 @@ function deleteSideMenuItem(mouseEvent) {
         const sideMenuItemIDs = sideMenuItem.id.split("_")
         const hotelRoomID = sideMenuItemIDs[0] + "_" + sideMenuItemIDs[1]
         const reservationIndex = sideMenuItemIDs[sideMenuItemIDs.length - 1]
-        console.log(reservationIndex)
 
         const reservedDates = JSON.parse(localStorage.getItem(hotelRoomID))
         const index = reservedDates.indexOf(sideMenuItemReservedDate);
@@ -251,10 +250,8 @@ function makeHotelDiv(hotelObject) {
     if (hotelObject.tags.length > 0) {
         hotelWrapper.appendChild(makeHotelTagsElement(hotelObject.tags))
     }
-    hotelWrapper.appendChild(makeDescriptionElement(hotelObject.descriptionFileURL, "hotel_description"))
-    makeRoomListElement(hotelObject.hotelID, hotelObject.roomsFileURL).then(function (roomListElement) {
-        hotelWrapper.appendChild(roomListElement)
-    })
+    hotelWrapper.appendChild(makeRoomListElement(hotelObject.hotelID, hotelObject.rooms))
+
 
     hotelListArea.appendChild(hotelWrapper)
 }
@@ -301,34 +298,26 @@ function makeDescriptionElement(fileURL, className) {
     return descriptionElement
 }
 
-function makeRoomListElement(hotelID, roomsFileURL) {
-    return getDataFromJSON(roomsFileURL).then(function (data) {
-        const rooms = data.rooms
-        const roomListElement = document.createElement("div")
-        roomListElement.setAttribute("class", "room_list")
-        for (let i = 0; i < rooms.length; i++) {
-            const room = rooms[i]
-            const hotelRoomID = hotelID + "_" + room.roomID
-            const roomWrapper = document.createElement("div")
-            roomWrapper.setAttribute("class", "room_wrapper")
-            roomWrapper.setAttribute("id", hotelRoomID)
+function makeRoomListElement(hotelID, rooms) {
+    const roomListElement = document.createElement("div")
+    roomListElement.setAttribute("class", "room_list")
+    for (let i = 0; i < rooms.length; i++) {
+        const room = rooms[i]
+        const hotelRoomID = hotelID + "_" + room.roomID
+        const roomWrapper = document.createElement("div")
+        roomWrapper.setAttribute("class", "room_wrapper")
+        roomWrapper.setAttribute("id", hotelRoomID)
 
-            roomWrapper.appendChild(makeImageElement(room.imageURL, "room_image"))
-            roomWrapper.appendChild(makeRoomNameElement(room.name))
-            roomWrapper.appendChild(makeDescriptionElement(room.infoFileURL, "room_info"))
-            roomWrapper.appendChild(makeRoomPriceElement(room.price))
-            roomWrapper.appendChild(makeReserveButtonElement(hotelRoomID))
+        roomWrapper.appendChild(makeImageElement(room.imageURL, "room_image"))
+        roomWrapper.appendChild(makeRoomNameElement(room.name))
+        roomWrapper.appendChild(makeDescriptionElement(room.infoFileURL, "room_info"))
+        roomWrapper.appendChild(makeRoomPriceElement(room.price))
+        roomWrapper.appendChild(makeReserveButtonElement(hotelRoomID))
 
-            roomListElement.appendChild(roomWrapper)
-        }
-        return roomListElement
-    })
-}
+        roomListElement.appendChild(roomWrapper)
+    }
+    return roomListElement
 
-function getDataFromJSON(roomsFileURL) {
-    return fetch(roomsFileURL)
-        .then(response => response.json())
-        .then(data => data)
 }
 
 function makeRoomNameElement(roomName) {

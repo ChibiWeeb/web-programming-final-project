@@ -1,4 +1,4 @@
-const accountID = "accountID01" //TEMPORARY
+const accountID = "accountID01" //TODO: Register and login with different accounts
 const hotelObjectStoreName = "hotelObjectStore"
 const hotelNumberOnEachPage = 20
 
@@ -105,9 +105,9 @@ class Hotel {
     tags
     imageURL
     descriptionFileURL
-    roomsFileURL
+    rooms
 
-    constructor(hotelID, name, country, city, tags, imageURL, descriptionFileURL, roomsFileURL) {
+    constructor(hotelID, name, country, city, tags, imageURL, descriptionFileURL, rooms) {
         this.hotelID = hotelID
         this.name = name
         this.country = country
@@ -115,6 +115,6 @@ class Hotel {
         this.tags = tags
         this.imageURL = imageURL
         this.descriptionFileURL = descriptionFileURL
-        this.roomsFileURL = roomsFileURL
+        this.rooms = rooms
     }
 }

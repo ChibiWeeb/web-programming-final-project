@@ -1,3 +1,4 @@
+const accountID = "accountID01" //TEMPORARY
 const hotelObjectStoreName = "hotelObjectStore"
 const hotelNumberOnEachPage = 20
 
@@ -20,7 +21,7 @@ const reservePopup = document.querySelector(".reserve_popup")
 const reservePopupCancelButton = document.querySelector("#reserve_cancel_button")
 const reservePopupReserveButton = document.querySelector("#reserve_reserve_button")
 
-const sidebar = document.querySelector("aside")
+const sideMenu = document.querySelector("aside")
 const sideMenuDimmedOverlay = document.querySelector(".side_menu_dimmed_overlay")
 
 const hotelListArea = document.querySelector(".hotel_list")

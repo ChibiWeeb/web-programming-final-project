@@ -224,16 +224,35 @@ html {
       @include dimmed-overlay($reserve_popup_dimmed_overlay-z-index)
     }
 
-    aside {
+    .side_menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       position: fixed;
       height: 100%;
       width: 0;
       z-index: $side-menu-z-index;
       top: 0;
       right: 0;
-      transition: 0.5s;
-      background-color: black;
-      color: wheat;
+      background-color: #e39898;
+
+      .side_menu_item {
+        position: relative;
+        width: 0;
+        margin: 10px 0;
+        background-color: #b55959;
+
+        .delete_side_menu_item_button {
+          display: none;
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          line-height: 20px;
+          top: 0;
+          right: 0;
+          background-color: darkred;
+        }
+      }
     }
 
     .side_menu_dimmed_overlay {

@@ -1,20 +1,24 @@
 let activePageNum = 1
 let hotelTotalNumber
 
-
-initialize()
-showHotelList()
-showDropdownOptions()
-
+// while (true) {
+//     if (localStorage.getItem("databaseInitialized") === "initialized") {
+        console.log("yes")
+        initialize()
+        showHotelList()
+        showDropdownOptions()
+        // break
+    // }
+// }
 
 function initialize() {
     logo.addEventListener("click", scrollToTop)
     filterButton.addEventListener("click", openFilterMenu)
     profileButton.addEventListener("click", function () {
-        openSidebar(250)
+        openSideMenu()
     })
     reservePopupCancelButton.addEventListener("click", closeReservePopup)
-    sideMenuDimmedOverlay.addEventListener("click", closeSidebar)
+    sideMenuDimmedOverlay.addEventListener("click", closeSideMenu)
 
     for (let i = 0; i < filterTags.length; i++) {
         filterTags[i].addEventListener("click", function () {
@@ -46,14 +50,22 @@ function scrollToTop() {
     document.documentElement.scrollTop = 0
 }
 
-function openSidebar(width) {
-    sidebar.style.width = width.toString() + "px"
+function openSideMenu() {
+    document.querySelectorAll(".side_menu_item").forEach(function (element) {
+        element.style.width = "240px"
+        element.querySelector(".delete_side_menu_item_button").style.display = "block"
+    })
+    sideMenu.style.width = "250px"
     html.style.overflow = "hidden"
     sideMenuDimmedOverlay.style.display = "block"
 }
 
-function closeSidebar() {
-    sidebar.style.width = "0"
+function closeSideMenu() {
+    document.querySelectorAll(".side_menu_item").forEach(function (element) {
+        element.style.width = "0"
+        element.querySelector(".delete_side_menu_item_button").style.display = "none"
+    })
+    sideMenu.style.width = "0"
     html.style.overflow = "auto"
     sideMenuDimmedOverlay.style.display = "none"
 }
@@ -127,7 +139,70 @@ function showHotelList() {
             }
             scrollToTop()
         }
+    }).then(function () {
+        makeSideMenuItems()
     })
+}
+
+function makeSideMenuItems() {
+    const reservations = JSON.parse(localStorage.getItem(accountID))
+    for (let i = 0; i < reservations.length; i++) {
+        makeSideMenuItem(reservations[i], i)
+    }
+}
+
+function makeSideMenuItem(reservation, index) {
+    const sideMenuItemWrapper = document.createElement("div")
+    sideMenuItemWrapper.setAttribute("class", "side_menu_item")
+    sideMenuItemWrapper.setAttribute("id", reservation.roomObjectID + "_side_menu_item_" + index)
+
+    const deleteSideMenuItemButtonElement = document.createElement("div")
+    deleteSideMenuItemButtonElement.setAttribute("class", "delete_side_menu_item_button")
+    deleteSideMenuItemButtonElement.classList.add("square_button")
+    deleteSideMenuItemButtonElement.appendChild(document.createTextNode("X"))
+    deleteSideMenuItemButtonElement.addEventListener("click", function (e) {
+        deleteSideMenuItem(e)
+    })
+    sideMenuItemWrapper.appendChild(deleteSideMenuItemButtonElement)
+
+    const reserverNameElement = document.createElement("div")
+    reserverNameElement.appendChild(document.createTextNode("Name: " + reservation.reserverName))
+    sideMenuItemWrapper.appendChild(reserverNameElement)
+
+    const reserverPhoneNumberElement = document.createElement("div")
+    reserverPhoneNumberElement.appendChild(document.createTextNode("Phone Number: " + reservation.reserverPhoneNumber))
+    sideMenuItemWrapper.appendChild(reserverPhoneNumberElement)
+
+    const reservedDateElement = document.createElement("div")
+    reservedDateElement.setAttribute("class", "side_menu_item_reserved_date")
+    reservedDateElement.appendChild(document.createTextNode("Reserved Date: " + reservation.reservedDate))
+    sideMenuItemWrapper.appendChild(reservedDateElement)
+
+    sideMenu.appendChild(sideMenuItemWrapper)
+}
+
+function deleteSideMenuItem(mouseEvent) {
+    if (mouseEvent.target && mouseEvent.target.parentNode) {
+        const sideMenuItem = mouseEvent.target.parentNode
+        const sideMenuItemReservedDate = sideMenuItem.querySelector(".side_menu_item_reserved_date").textContent.split(" ")[2]
+        const sideMenuItemIDs = sideMenuItem.id.split("_")
+        const hotelRoomID = sideMenuItemIDs[0] + "_" + sideMenuItemIDs[1]
+        const reservationIndex = sideMenuItemIDs[sideMenuItemIDs.length - 1]
+        console.log(reservationIndex)
+
+        const reservedDates = JSON.parse(localStorage.getItem(hotelRoomID))
+        const index = reservedDates.indexOf(sideMenuItemReservedDate);
+        if (index > -1) {
+            reservedDates.splice(index, 1);
+            localStorage.setItem(hotelRoomID, JSON.stringify(reservedDates))
+        }
+
+        const reservationObject = JSON.parse(localStorage.getItem(accountID))
+        reservationObject.splice(reservationIndex, 1)
+        localStorage.setItem(accountID, JSON.stringify(reservationObject))
+
+        sideMenuItem.parentNode.removeChild(sideMenuItem)
+    }
 }
 
 function getHotels(countryName, cityName, tags) {
@@ -364,21 +439,37 @@ function closeReservePopup() {
 }
 
 function reserveTheRoom(roomObjectID) {
-    const dateFromInput = document.querySelector("#date_from_input")
-    const dateFrom = new Date(dateFromInput.value)
-    const dateToInput = document.querySelector("#date_to_input")
-    const dateTo = new Date(dateToInput.value)
+    const dateFromValue = document.querySelector("#date_from_input").value
+    const dateFrom = new Date(dateFromValue)
+    const dateToValue = document.querySelector("#date_to_input").value
+    const dateTo = new Date(dateToValue)
     const dateToIsEarlierThanDateFrom = (dateTo.getTime() < dateFrom.getTime())
+    const firstName = document.querySelector("#first_name_input").value
+    const lastName = document.querySelector("#last_name_input").value
+    const phoneNumber = document.querySelector("#phone_number_input").value
 
-    if (dateFromInput.value === "" || dateToInput.value === "") {
-        alert("Date input cannot be empty")
+    if (firstName === "" || lastName === "" || phoneNumber === "") {
+        alert("Credentials input fields cannot be empty")
+    } else if (!(/^\+?\d+$/.test(phoneNumber))) {
+        alert("Illegal characters in the phone number input field. Only numbers with an optional leading plus is allowed")
+    } else if (dateFromValue === "" || dateToValue === "") {
+        alert("Date input fields cannot be empty")
     } else if (overlapsWithReservedDates(dateFrom, dateTo, roomObjectID)) {
         alert("Chosen date period contains already reserved dates")
     } else if (dateToIsEarlierThanDateFrom) {
         alert("End Date cannot be earlier than Start Date")
     } else {
-        const formattedChosenDate = dateFromInput.value + ":" + dateToInput.value
+        const formattedChosenDate = dateFromValue + ":" + dateToValue
 
+        const reservationObject = {
+            roomObjectID: roomObjectID,
+            reserverName: firstName + " " + lastName,
+            reserverPhoneNumber: phoneNumber,
+            reservedDate: formattedChosenDate
+        }
+        const reservations = JSON.parse(localStorage.getItem(accountID))
+        reservations.push(reservationObject)
+        localStorage.setItem(accountID, JSON.stringify(reservations))
 
         const roomReservedDates = JSON.parse(localStorage.getItem(roomObjectID))
         roomReservedDates.push(formattedChosenDate)

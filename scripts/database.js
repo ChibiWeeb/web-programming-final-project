@@ -1,4 +1,8 @@
-databaseInit()
+if (localStorage.getItem("databaseInitialized") === null) {
+    databaseInit()
+    localStorage.setItem("databaseInitialized", "initialized")
+}
+
 
 function databaseInit() {
     let openRequest = indexedDB.open("hotelsDatabase", 1)
@@ -159,23 +163,6 @@ function addInitialHotels(database) {
         let hotelObjectStore = transaction.objectStore(hotelObjectStoreName)
         hotelObjectStore.add(hotelObject)
     })
-
-    for (let i = 11; i < 61; i++) {
-        makeHotelObject(
-            "hotel" + i,
-            "Extra Hotel " + i,
-            countryList.japan.name,
-            countryList.japan.cities.sapporo,
-            [tagList.free_wifi, tagList.free_parking],
-            "https://i.picsum.photos/id/718/300/200.jpg?hmac=2AXNXV_A7Vmp-rOv8sWOWmRkGUZUJmc8pP3Gvsmu-PE",
-            "descriptions/name" + i + ".txt",
-            "rooms/hotel01.json"
-        ).then(function (hotelObject) {
-            let transaction = database.transaction(hotelObjectStoreName, "readwrite")
-            let hotelObjectStore = transaction.objectStore(hotelObjectStoreName)
-            hotelObjectStore.add(hotelObject)
-        })
-    }
 }
 
 function makeHotelObject(hotelID, hotelName, countryName, cityName, tags, imageURL, descriptionFileURL, roomsFileURL) {
@@ -189,13 +176,12 @@ function makeHotelObject(hotelID, hotelName, countryName, cityName, tags, imageU
                     localStorage.setItem(reservedDatesID, "[]")
                 }
             } else {
-                for (let j = 0; j < reservedDates.length; j++) {
-                    if (localStorage.getItem(reservedDatesID) === null) {
-                        localStorage.setItem(reservedDatesID, JSON.stringify(reservedDates))
-                    }
+                if (localStorage.getItem(reservedDatesID) === null) {
+                    localStorage.setItem(reservedDatesID, JSON.stringify(reservedDates))
                 }
             }
         }
+        localStorage.setItem(accountID, "[]")
         return new Hotel(hotelID, hotelName, countryName, cityName, tags, imageURL, descriptionFileURL, roomsFileURL)
     })
 }

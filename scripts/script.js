@@ -10,7 +10,7 @@ showDropdownOptions()
 function initialize() {
     logo.addEventListener("click", scrollToTop)
     filterButton.addEventListener("click", openFilterMenu)
-    profileButton.addEventListener("click", function () {
+    bookedButton.addEventListener("click", function () {
         openSideMenu()
     })
     reservePopupCancelButton.addEventListener("click", closeReservePopup)

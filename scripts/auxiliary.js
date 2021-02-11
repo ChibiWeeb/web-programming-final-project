@@ -7,7 +7,7 @@ const html = document.querySelector("html")
 
 const logo = document.querySelector(".logo")
 const filterButton = document.querySelector(".filter_button")
-const profileButton = document.querySelector(".profile_button")
+const bookedButton = document.querySelector(".booked_button")
 
 const filterMenu = document.querySelector(".filter_menu")
 const filterCountriesDropdownSelect = document.querySelector("#countries")

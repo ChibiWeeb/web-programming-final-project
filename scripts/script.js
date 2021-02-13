@@ -1,7 +1,6 @@
 let activePageNum = 1
 let hotelTotalNumber
 let reservationsID = sessionStorage.getItem("logged_in") + "_reservations"
-console.log(reservationsID)
 
 initialize()
 showHotelList()

@@ -23,7 +23,7 @@ function register() {
         localStorage.setItem(accountID, password)
         alert("Registration successful")
         sessionStorage.setItem("logged_in", accountID)
-        location.href = "index.html"
+        location.href = "pages/index.html"
     }
 }
 
@@ -38,6 +38,6 @@ function login() {
         alert("Password is incorrect")
     } else {
         sessionStorage.setItem("logged_in", accountID)
-        location.href = "index.html"
+        location.href = "pages/index.html"
     }
 }

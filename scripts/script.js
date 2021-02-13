@@ -1,6 +1,7 @@
 let activePageNum = 1
 let hotelTotalNumber
-
+let reservationsID = sessionStorage.getItem("logged_in") + "_reservations"
+console.log(reservationsID)
 
 initialize()
 showHotelList()
@@ -39,6 +40,19 @@ function initialize() {
             if (targetedHotel !== undefined) expandHotel(targetedHotel)
         }
     })
+
+    makeAccountIDLabel()
+
+    const reservations = localStorage.getItem(reservationsID)
+    if (reservations === null) {
+        localStorage.setItem(reservationsID, "[]")
+    }
+}
+
+function makeAccountIDLabel() {
+    const accountIDLabelElement = document.createElement("h3")
+    accountIDLabelElement.appendChild(document.createTextNode("Hello, " + sessionStorage.getItem("logged_in")))
+    sideMenuAccountIDLabel.appendChild(accountIDLabelElement)
 }
 
 function scrollToTop() {
@@ -54,6 +68,7 @@ function openSideMenu() {
     sideMenu.style.width = "250px"
     html.style.overflow = "hidden"
     sideMenu.style.overflowY = "auto"
+    sideMenuAccountIDLabel.style.display = "block"
     sideMenuDimmedOverlay.style.display = "block"
 }
 
@@ -65,11 +80,12 @@ function closeSideMenu() {
     sideMenu.style.width = "0"
     html.style.overflow = "auto"
     sideMenu.style.overflowY = "hidden"
+    sideMenuAccountIDLabel.style.display = "none"
     sideMenuDimmedOverlay.style.display = "none"
 }
 
 function openFilterMenu() {
-    filterButton.src = "images/filter_icon_filled.png"
+    filterButton.src = "../images/filter_icon_filled.png"
     filterMenu.style.top = "100px"
 }
 
@@ -95,7 +111,7 @@ function resetFilters() {
 }
 
 function applyFilters() {
-    filterButton.src = "images/filter_icon.png"
+    filterButton.src = "../images/filter_icon.png"
     filterMenu.style.top = "-1000px"
 
     showHotelList()
@@ -143,7 +159,7 @@ function showHotelList() {
 }
 
 function makeSideMenuItems() {
-    const reservations = JSON.parse(localStorage.getItem(accountID))
+    const reservations = JSON.parse(localStorage.getItem(reservationsID))
     for (let i = 0; i < reservations.length; i++) {
         makeSideMenuItem(reservations[i], i)
     }
@@ -194,9 +210,9 @@ function deleteSideMenuItem(mouseEvent) {
             localStorage.setItem(hotelRoomID, JSON.stringify(reservedDates))
         }
 
-        const reservationObject = JSON.parse(localStorage.getItem(accountID))
+        const reservationObject = JSON.parse(localStorage.getItem(reservationsID))
         reservationObject.splice(reservationIndex, 1)
-        localStorage.setItem(accountID, JSON.stringify(reservationObject))
+        localStorage.setItem(reservationsID, JSON.stringify(reservationObject))
 
         sideMenuItem.parentNode.removeChild(sideMenuItem)
     }
@@ -454,9 +470,9 @@ function reserveTheRoom(roomObjectID) {
             reserverPhoneNumber: phoneNumber,
             reservedDate: formattedChosenDate
         }
-        const reservations = JSON.parse(localStorage.getItem(accountID))
+        const reservations = JSON.parse(localStorage.getItem(reservationsID))
         reservations.push(reservationObject)
-        localStorage.setItem(accountID, JSON.stringify(reservations))
+        localStorage.setItem(reservationsID, JSON.stringify(reservations))
 
         const roomReservedDates = JSON.parse(localStorage.getItem(roomObjectID))
         roomReservedDates.push(formattedChosenDate)

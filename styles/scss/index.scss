@@ -236,6 +236,10 @@ html {
       right: 0;
       background-color: #e39898;
 
+      .account_id_label {
+        display: none;
+      }
+
       .side_menu_item {
         position: relative;
         width: 0;

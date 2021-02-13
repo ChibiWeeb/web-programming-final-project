@@ -182,6 +182,9 @@ html body .side_menu {
   right: 0;
   background-color: #e39898;
 }
+html body .side_menu .account_id_label {
+  display: none;
+}
 html body .side_menu .side_menu_item {
   position: relative;
   width: 0;

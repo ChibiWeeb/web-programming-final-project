@@ -506,7 +506,7 @@ function makeHotelObject(hotelID, hotelName, countryName, cityName, tags, imageU
             localStorage.setItem(reservedDatesID, "[]")
         }
     }
-    localStorage.setItem(accountID, "[]")
+    localStorage.setItem(reservationsID, "[]")
     return new Hotel(hotelID, hotelName, countryName, cityName, tags, imageURL, descriptionFileURL, rooms)
 
 }
